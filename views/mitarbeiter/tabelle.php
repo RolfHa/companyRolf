@@ -19,21 +19,21 @@
         <th>Ändern</th>
     </tr>
 <!--    --><?php
-//    for ($i = 0; $i < count($ms); $i++) {
+//    for ($i = 0; $i < count($employees); $i++) {
 //    ?>
 <!--    <tr>-->
-<!--        <td>--><?php //echo $ms[$i]->getFirstName(); ?><!--</td>-->
-<!--        <td>--><?php //echo $ms[$i]->getLastName(); ?><!--</td>-->
-<!--        <td>--><?php //echo $ms[$i]->getGender(); ?><!--</td>-->
-<!--        <td>--><?php //echo $ms[$i]->getSalary(); ?><!--</td>-->
-<!--        <td><a href="index.php?action=delete&id=--><?php //echo $ms[$i]->getId(); ?><!--"><button>Löschen</button></a></td>-->
-<!--        <td><a href="index.php?action=edit&id=--><?php //echo $ms[$i]->getId(); ?><!--"><button>Ändern</button></a></td>-->
+<!--        <td>--><?php //echo $employees[$i]->getFirstName(); ?><!--</td>-->
+<!--        <td>--><?php //echo $employees[$i]->getLastName(); ?><!--</td>-->
+<!--        <td>--><?php //echo $employees[$i]->getGender(); ?><!--</td>-->
+<!--        <td>--><?php //echo $employees[$i]->getSalary(); ?><!--</td>-->
+<!--        <td><a href="index.php?action=delete&id=--><?php //echo $employees[$i]->getId(); ?><!--"><button>Löschen</button></a></td>-->
+<!--        <td><a href="index.php?action=edit&id=--><?php //echo $employees[$i]->getId(); ?><!--"><button>Ändern</button></a></td>-->
 <!--    </tr>-->
 <!--    --><?php
 //    }
 //    ?>
     <?php
-    foreach ($ms as $m ) :
+    foreach ($employees as $m ) :
         ?>
         <tr>
             <td><?php echo $m->getFirstName(); ?></td>

@@ -5,12 +5,12 @@ spl_autoload_register(function ($className):void{
     include 'classes/' . $className . '.php';
 });
 
-//echo '<pre>';
-//echo '$_GET ';
-//print_r($_GET);
-//echo '$_POST ';
-//print_r($_POST);
-//echo '</pre>';
+echo '<pre>';
+echo '$_GET ';
+print_r($_GET);
+echo '$_POST ';
+print_r($_POST);
+echo '</pre>';
 
 $action = $_REQUEST['action'] ?? 'showTabelle'; // $_REQUEST = $_GET und $_POST
 $id = $_REQUEST['id'] ?? '0';
@@ -27,7 +27,7 @@ $type = $_POST['type'] ?? '';
 $view = 'tabelle';
 if ($action === 'showTabelle') {
 //    if ($area === 'mitarbeiter') {
-//        $ms = (new Mitarbeiter())->getAllAsObjects();
+//        $employees = (new Mitarbeiter())->getAllAsObjects();
 //    } elseif ($area === 'auto') {
 //        $cars = (new Auto())->getAllAsObjects();
 //    }
@@ -36,23 +36,28 @@ if ($action === 'showTabelle') {
     $controller = new $controllerName($area, $view);
     $array = $controller->tuwas();
     if ($area =='mitarbeiter') {
-        $ms = $array;
+        $employees = $array;
     } elseif ($area === 'auto') {
         $cars = $array;
     }
 } elseif ($action === 'showEingabe') {
 
-    if ($area === 'mitarbeiter') {
-        $action = 'insert';
-    } elseif ($area === 'auto') {
-        $action = 'insert';
-    }
-    $view = 'eingabe';
+//    if ($area === 'mitarbeiter') {
+//        $action = 'insert';
+//    } elseif ($area === 'auto') {
+//        $action = 'insert';
+//    }
+    echo $view;
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $view); echo $view;
+    $array = $controller->tuwas();echo $view;
+    $action = 'insert';
+    //$view = 'eingabe';
 } elseif ($action === 'delete') {
 
     if ($area === 'mitarbeiter') {
-        (new Mitarbeiter())->deleteObjectById($id);
-        $ms = (new Mitarbeiter())->getAllAsObjects();
+        (new Employee())->deleteObjectById($id);
+        $employees = (new Employee())->getAllAsObjects();
     } elseif ($area === 'auto') {
         $c = (new Auto())->deleteObjectById($id);
         $cars = (new Auto())->getAllAsObjects();
@@ -60,8 +65,8 @@ if ($action === 'showTabelle') {
     $view = 'tabelle';
 } elseif ($action === 'insert') {
     if ($area === 'mitarbeiter') {
-        (new Mitarbeiter())->insert($firstName, $lastName, $gender, $salary);
-        $ms = (new Mitarbeiter())->getAllAsObjects();
+        (new Employee())->insert($firstName, $lastName, $gender, $salary);
+        $employees = (new Employee())->getAllAsObjects();
     } elseif ($area === 'auto') {
         (new Auto())->insert($numberPlate, $maker, $type);
         $cars = (new Auto())->getAllAsObjects();
@@ -70,7 +75,7 @@ if ($action === 'showTabelle') {
 } elseif ($action === 'showEdit') {
 
     if ($area === 'mitarbeiter') {
-        $m = (new Mitarbeiter())->getObjectById($id);
+        $m = (new Employee())->getObjectById($id);
         $action = 'update';
     } elseif ($area === 'auto') {
         $c = (new Auto())->getObjectById($id);
@@ -79,8 +84,8 @@ if ($action === 'showTabelle') {
     $view = 'eingabe';
 } elseif ($action === 'update') {
     if ($area === 'mitarbeiter') {
-        (new Mitarbeiter($id, $firstName, $lastName, $gender, $salary))->update();
-        $ms = (new Mitarbeiter())->getAllAsObjects();
+        (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
+        $employees = (new Employee())->getAllAsObjects();
     } elseif ($area === 'auto') {
         (new Auto($id, $numberPlate, $maker, $type))->update();
         $cars = (new Auto())->getAllAsObjects();

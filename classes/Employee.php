@@ -1,6 +1,6 @@
 <?php
 
-class Mitarbeiter implements IBasic
+class Employee implements IBasic
 {
     /**
      * @var int|null
@@ -69,7 +69,7 @@ class Mitarbeiter implements IBasic
     }
 
     /**
-     * @return Mitarbeiter[]
+     * @return Employee[]
      */
     public function getAllAsObjects(): array
     {
@@ -77,7 +77,7 @@ class Mitarbeiter implements IBasic
         $sql = 'SELECT * FROM mitarbeiter';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        $mitarbeiter = $stmt->fetchAll(PDO::FETCH_CLASS, 'Mitarbeiter');
+        $mitarbeiter = $stmt->fetchAll(PDO::FETCH_CLASS, 'Employee');
         return $mitarbeiter;
     }
 
@@ -96,23 +96,23 @@ class Mitarbeiter implements IBasic
     public function insert(string $firstName,
                            string $lastName,
                            string $gender,
-                           float  $salary): Mitarbeiter
+                           float  $salary): Employee
     {
         $pdo = Db::getConnection();
         $sql = 'INSERT INTO mitarbeiter VALUES(NULL,?,?,?,?)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$firstName, $lastName, $gender, $salary]);
         $id = $pdo->lastInsertId();
-        return new Mitarbeiter($id, $firstName, $lastName, $gender, $salary);
+        return new Employee($id, $firstName, $lastName, $gender, $salary);
     }
 
-    public function getObjectById(int $id): Mitarbeiter
+    public function getObjectById(int $id): Employee
     {
         $pdo = Db::getConnection();
         $sql = 'SELECT * FROM mitarbeiter WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        $mitarbeiter = $stmt->fetchObject('Mitarbeiter');
+        $mitarbeiter = $stmt->fetchObject('Employee');
         return $mitarbeiter;
     }
 
