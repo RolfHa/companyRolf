@@ -1,7 +1,7 @@
 <?php
 
 include 'config.php';
-spl_autoload_register(function ($className):void{
+spl_autoload_register(function ($className): void {
     include 'classes/' . $className . '.php';
 });
 
@@ -36,7 +36,7 @@ if ($action === 'showTable') {
     $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
     $array = $controller->tuwas();
     // korrekte Namen für edit.php
-    if ($area =='employee') {
+    if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
@@ -52,13 +52,16 @@ if ($action === 'showTable') {
     $controllerName = ucfirst($action) . 'Controller';
     $controller = new $controllerName($area, $view, $id);
     $array = $controller->tuwas();
-    if ($area =='employee') {
-        $m = $array[0];
-    } elseif ($area === 'car') {
-        $c = $array[0];
+    if (count($array) > 0) {
+        if ($area == 'employee') {
+            $m = $array[0];
+        } elseif ($area === 'car') {
+            $c = $array[0];
+        }
     }
-    if ($id !== 0){
+    if ($id != 0) {
         $action = 'update';
+
     } else {
         $action = 'insert';
     }
@@ -74,44 +77,70 @@ if ($action === 'showTable') {
 //        $c = (new Car())->deleteObjectById($id);
 //        $cars = (new Car())->getAllAsObjects();
 //    }
-    $view = 'table';
+    //$view = 'table';
     $controllerName = ucfirst($action) . 'Controller';
     $controller = new $controllerName($area, $view, $id);
     $array = $controller->tuwas();
     // korrekte Namen für edit.php
-    if ($area =='employee') {
+    if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
     }
 } elseif ($action === 'insert') {
-    if ($area === 'employee') {
-        (new Employee())->insert($firstName, $lastName, $gender, $salary);
-        $employees = (new Employee())->getAllAsObjects();
-    } elseif ($area === 'car') {
-        (new Car())->insert($numberPlate, $maker, $type);
-        $cars = (new Car())->getAllAsObjects();
-    }
-    $view = 'table';
-} elseif ($action === 'showEdit') {
+//    if ($area === 'employee') {
+//        (new Employee())->insert($firstName, $lastName, $gender, $salary);
+//        $employees = (new Employee())->getAllAsObjects();
+//    } elseif ($area === 'car') {
+//        (new Car())->insert($numberPlate, $maker, $type);
+//        $cars = (new Car())->getAllAsObjects();
+//    }
+//    $view = 'table';
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $view, ['firstName' => $firstName, 'lastName' => $lastName
+        , 'gender' => $gender, 'salary' => $salary
+        , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
+    ]);  // $view wird im Konstruktor überschrieben
 
-    if ($area === 'employee') {
-        $m = (new Employee())->getObjectById($id);
-        $action = 'update';
+    //$controller = new $controllerName($area, $view, $object);  // $view wird im Konstruktor überschrieben
+    $array = $controller->tuwas();
+// korrekte Namen für edit.php
+    if ($area == 'employee') {
+        $employees = $array;
     } elseif ($area === 'car') {
-        $c = (new Car())->getObjectById($id);
-        $action = 'update';
+        $cars = $array;
     }
-    $view = 'edit';
+} elseif ($action === 'showEdit') { // => Zeile 44
+
+//    if ($area === 'employee') {
+//        $m = (new Employee())->getObjectById($id);
+//        $action = 'update';
+//    } elseif ($area === 'car') {
+//        $c = (new Car())->getObjectById($id);
+//        $action = 'update';
+//    }
+//    $view = 'edit';
+
 } elseif ($action === 'update') {
-    if ($area === 'employee') {
-        (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
-        $employees = (new Employee())->getAllAsObjects();
+//    if ($area === 'employee') {
+//        (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
+//        $employees = (new Employee())->getAllAsObjects();
+//    } elseif ($area === 'car') {
+//        (new Car($id, $numberPlate, $maker, $type))->update();
+//        $cars = (new Car())->getAllAsObjects();
+//    }
+//    $view = 'table';
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $view, ['id' => $id, 'firstName' => $firstName, 'lastName' => $lastName
+        , 'gender' => $gender, 'salary' => $salary
+        , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
+    ]);  // $view wird im Konstruktor überschrieben
+    $array = $controller->tuwas();
+    if ($area == 'employee') {
+        $employees = $array;
     } elseif ($area === 'car') {
-        (new Car($id, $numberPlate, $maker, $type))->update();
-        $cars = (new Car())->getAllAsObjects();
+        $cars = $array;
     }
-    $view = 'table';
 }
 
 include 'views/' . $area . '/' . $view . '.php';
