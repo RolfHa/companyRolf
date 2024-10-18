@@ -33,8 +33,9 @@ if ($action === 'showTabelle') {
 //    }
 //    $view = 'tabelle';
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);
+    $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
     $array = $controller->tuwas();
+    // korrekte Namen für tabelle.php
     if ($area =='mitarbeiter') {
         $employees = $array;
     } elseif ($area === 'auto') {
@@ -47,22 +48,31 @@ if ($action === 'showTabelle') {
 //    } elseif ($area === 'auto') {
 //        $action = 'insert';
 //    }
-    echo $view;
+
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view); echo $view;
-    $array = $controller->tuwas();echo $view;
+    $controller = new $controllerName($area, $view);
+    $array = $controller->tuwas();
     $action = 'insert';
     //$view = 'eingabe';
 } elseif ($action === 'delete') {
 
-    if ($area === 'mitarbeiter') {
-        (new Employee())->deleteObjectById($id);
-        $employees = (new Employee())->getAllAsObjects();
-    } elseif ($area === 'auto') {
-        $c = (new Auto())->deleteObjectById($id);
-        $cars = (new Auto())->getAllAsObjects();
-    }
+//    if ($area === 'mitarbeiter') {
+//        (new Employee())->deleteObjectById($id);
+//        $employees = (new Employee())->getAllAsObjects();
+//    } elseif ($area === 'auto') {
+//        $c = (new Auto())->deleteObjectById($id);
+//        $cars = (new Auto())->getAllAsObjects();
+//    }
     $view = 'tabelle';
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $view, $id);
+    $array = $controller->tuwas();
+    // korrekte Namen für tabelle.php
+    if ($area =='mitarbeiter') {
+        $employees = $array;
+    } elseif ($area === 'auto') {
+        $cars = $array;
+    }
 } elseif ($action === 'insert') {
     if ($area === 'mitarbeiter') {
         (new Employee())->insert($firstName, $lastName, $gender, $salary);

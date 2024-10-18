@@ -13,13 +13,12 @@ class showTabelleController
     {
         $this->area = $area;
         $this->setView();
-        //$this->view = $view;
         $view = $this->view;
     }
 
     public function tuwas() : array
     {
-        $view = 'tabelle';
+
         if ($this->area === 'mitarbeiter') {
             $employees = (new Employee())->getAllAsObjects();
             return $employees;
@@ -27,6 +26,7 @@ class showTabelleController
             $cars = (new Auto())->getAllAsObjects();
             return $cars;
         }
+
     }
     public function setView():void
     {
