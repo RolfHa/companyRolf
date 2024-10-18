@@ -40,8 +40,8 @@
             <td><?php echo $m->getLastName(); ?></td>
             <td><?php echo $m->getGender(); ?></td>
             <td><?php echo number_format($m->getSalary(),2, ',',''); ?></td>
-            <td><a href="index.php?action=delete&area=mitarbeiter&id=<?php echo $m->getId(); ?>"><button>Löschen</button></a></td>
-            <td><a href="index.php?action=showEdit&area=mitarbeiter&id=<?php echo $m->getId(); ?>"><button>Ändern</button></a></td>
+            <td><a href="index.php?action=delete&area=employee&id=<?php echo $m->getId(); ?>"><button>Löschen</button></a></td>
+            <td><a href="index.php?action=showEdit&area=employee&id=<?php echo $m->getId(); ?>"><button>Ändern</button></a></td>
         </tr>
         <?php
     endforeach;

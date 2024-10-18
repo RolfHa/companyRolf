@@ -1,7 +1,7 @@
 <?php
 
 
-class Auto implements IBasic
+class Car implements IBasic
 {
     private int|null $id;
     private string|null $numberPlate;
@@ -48,47 +48,47 @@ class Auto implements IBasic
     public function getAllAsObjects(): array
     {
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM auto';
+        $sql = 'SELECT * FROM car';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        $cars = $stmt->fetchAll(PDO::FETCH_CLASS, 'auto');
+        $cars = $stmt->fetchAll(PDO::FETCH_CLASS, 'Car');
         return $cars;
     }
 
     public function deleteObjectById(int $id): void
     {
         $pdo = Db::getConnection();
-        $sql = 'DELETE FROM auto WHERE id=?';
+        $sql = 'DELETE FROM car WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
     }
 
     public function insert(string $numberPlate,
                            string $maker,
-                           string $type): Auto
+                           string $type): Car
     {
         $pdo = Db::getConnection();
-        $sql = 'INSERT INTO auto VALUES(NULL,?,?,?)';
+        $sql = 'INSERT INTO car VALUES(NULL,?,?,?)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$numberPlate, $maker, $type]);
         $id = $pdo->lastInsertId();
-        return new Auto($id, $numberPlate, $maker, $type);
+        return new Car($id, $numberPlate, $maker, $type);
     }
 
-    public function getObjectById(int $id): Auto
+    public function getObjectById(int $id): Car
     {
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM auto WHERE id=?';
+        $sql = 'SELECT * FROM car WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        $c = $stmt->fetchObject('Auto');
+        $c = $stmt->fetchObject('Car');
         return $c;
     }
 
     public function update(): void
     {
         $pdo = Db::getConnection();
-        $sql = 'UPDATE auto SET numberPlate=?, maker=?, type=? WHERE id=?';
+        $sql = 'UPDATE car SET numberPlate=?, maker=?, type=? WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$this->numberPlate, $this->maker, $this->type, $this->id]);
     }

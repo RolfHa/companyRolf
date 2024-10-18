@@ -12,95 +12,106 @@ echo '$_POST ';
 print_r($_POST);
 echo '</pre>';
 
-$action = $_REQUEST['action'] ?? 'showTabelle'; // $_REQUEST = $_GET und $_POST
+$action = $_REQUEST['action'] ?? 'showTable'; // $_REQUEST = $_GET und $_POST
 $id = $_REQUEST['id'] ?? '0';
 $firstName = $_POST['firstName'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
 $gender = $_POST['gender'] ?? '';
 $salaryStr = $_POST['salary'] ?? '';
 $salary = (float)$salaryStr;
-$area = $_REQUEST['area'] ?? 'mitarbeiter';
+$area = $_REQUEST['area'] ?? 'employee';
 $numberPlate = $_POST['numberPlate'] ?? '';
 $maker = $_POST['maker'] ?? '';
 $type = $_POST['type'] ?? '';
 
-$view = 'tabelle';
-if ($action === 'showTabelle') {
-//    if ($area === 'mitarbeiter') {
+$view = 'table';
+if ($action === 'showTable') {
+//    if ($area === 'employee') {
 //        $employees = (new Mitarbeiter())->getAllAsObjects();
 //    } elseif ($area === 'auto') {
-//        $cars = (new Auto())->getAllAsObjects();
+//        $cars = (new Car())->getAllAsObjects();
 //    }
 //    $view = 'tabelle';
     $controllerName = ucfirst($action) . 'Controller';
     $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
     $array = $controller->tuwas();
-    // korrekte Namen für tabelle.php
-    if ($area =='mitarbeiter') {
+    // korrekte Namen für edit.php
+    if ($area =='employee') {
         $employees = $array;
-    } elseif ($area === 'auto') {
+    } elseif ($area === 'car') {
         $cars = $array;
     }
-} elseif ($action === 'showEingabe') {
+} elseif ($action === 'showEdit') {
 
-//    if ($area === 'mitarbeiter') {
+//    if ($area === 'employee') {
 //        $action = 'insert';
 //    } elseif ($area === 'auto') {
 //        $action = 'insert';
 //    }
 
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);
-    $array = $controller->tuwas();
-    $action = 'insert';
-    //$view = 'eingabe';
-} elseif ($action === 'delete') {
-
-//    if ($area === 'mitarbeiter') {
-//        (new Employee())->deleteObjectById($id);
-//        $employees = (new Employee())->getAllAsObjects();
-//    } elseif ($area === 'auto') {
-//        $c = (new Auto())->deleteObjectById($id);
-//        $cars = (new Auto())->getAllAsObjects();
-//    }
-    $view = 'tabelle';
     $controllerName = ucfirst($action) . 'Controller';
     $controller = new $controllerName($area, $view, $id);
     $array = $controller->tuwas();
-    // korrekte Namen für tabelle.php
-    if ($area =='mitarbeiter') {
+    if ($area =='employee') {
+        $m = $array[0];
+    } elseif ($area === 'car') {
+        $c = $array[0];
+    }
+    if ($id !== 0){
+        $action = 'update';
+    } else {
+        $action = 'insert';
+    }
+
+
+    //$view = 'eingabe';
+} elseif ($action === 'delete') {
+
+//    if ($area === 'employee') {
+//        (new Employee())->deleteObjectById($id);
+//        $employees = (new Employee())->getAllAsObjects();
+//    } elseif ($area === 'auto') {
+//        $c = (new Car())->deleteObjectById($id);
+//        $cars = (new Car())->getAllAsObjects();
+//    }
+    $view = 'table';
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $view, $id);
+    $array = $controller->tuwas();
+    // korrekte Namen für edit.php
+    if ($area =='employee') {
         $employees = $array;
-    } elseif ($area === 'auto') {
+    } elseif ($area === 'car') {
         $cars = $array;
     }
 } elseif ($action === 'insert') {
-    if ($area === 'mitarbeiter') {
+    if ($area === 'employee') {
         (new Employee())->insert($firstName, $lastName, $gender, $salary);
         $employees = (new Employee())->getAllAsObjects();
-    } elseif ($area === 'auto') {
-        (new Auto())->insert($numberPlate, $maker, $type);
-        $cars = (new Auto())->getAllAsObjects();
+    } elseif ($area === 'car') {
+        (new Car())->insert($numberPlate, $maker, $type);
+        $cars = (new Car())->getAllAsObjects();
     }
-    $view = 'tabelle';
+    $view = 'table';
 } elseif ($action === 'showEdit') {
 
-    if ($area === 'mitarbeiter') {
+    if ($area === 'employee') {
         $m = (new Employee())->getObjectById($id);
         $action = 'update';
-    } elseif ($area === 'auto') {
-        $c = (new Auto())->getObjectById($id);
+    } elseif ($area === 'car') {
+        $c = (new Car())->getObjectById($id);
         $action = 'update';
     }
-    $view = 'eingabe';
+    $view = 'edit';
 } elseif ($action === 'update') {
-    if ($area === 'mitarbeiter') {
+    if ($area === 'employee') {
         (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
         $employees = (new Employee())->getAllAsObjects();
-    } elseif ($area === 'auto') {
-        (new Auto($id, $numberPlate, $maker, $type))->update();
-        $cars = (new Auto())->getAllAsObjects();
+    } elseif ($area === 'car') {
+        (new Car($id, $numberPlate, $maker, $type))->update();
+        $cars = (new Car())->getAllAsObjects();
     }
-    $view = 'tabelle';
+    $view = 'table';
 }
 
 include 'views/' . $area . '/' . $view . '.php';

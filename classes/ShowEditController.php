@@ -1,21 +1,19 @@
 <?php
 
-class DeleteController
+class ShowEditController
 {
     private string $area;
     private string $view;
-    private int $id;
     public function __construct(string $area, string &$view, int $id)
     {
         $this->area = $area;
         $this->id = $id;
         $this->tuwas();
         $view = $this->view;
-
     }
     public function tuwas() : array
     {
-        $this->view = 'table';
+        $this->view = 'edit';
 //        if ($this->area === 'employee') {
 //            $employees = (new Employee())->getAllAsObjects();
 //            return $employees;
@@ -24,18 +22,14 @@ class DeleteController
 //            return $cars;
 //        }
         if ($this->area === 'employee'){
-            (new Employee())->deleteObjectById($this->id);
-        }elseif ($this->area === 'car'){
-            (new Car())->deleteObjectById($this->id);
-        }
-        if ($this->area === 'employee') {
-            $employees = (new Employee())->getAllAsObjects();
-            return $employees;
-        } elseif ($this->area === 'car') {
-            $cars = (new Car())->getAllAsObjects();
-            return $cars;
+            return [(new Employee())->getObjectById($this->id)];
+        } elseif ($this->area === 'car'){
+            return [(new Car())->getObjectById($this->id)];
+        } else {
+            return [];
         }
 
-        return [];
     }
+
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-class showTabelleController
+class showTableController
 {
     private string $area;
     private string $view;
@@ -19,18 +19,18 @@ class showTabelleController
     public function tuwas() : array
     {
 
-        if ($this->area === 'mitarbeiter') {
+        if ($this->area === 'employee') {
             $employees = (new Employee())->getAllAsObjects();
             return $employees;
-        } elseif ($this->area === 'auto') {
-            $cars = (new Auto())->getAllAsObjects();
+        } elseif ($this->area === 'car') {
+            $cars = (new Car())->getAllAsObjects();
             return $cars;
         }
 
     }
     public function setView():void
     {
-        $this->view = 'tabelle';
+        $this->view = 'table';
     }
 
 

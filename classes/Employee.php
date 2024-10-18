@@ -74,11 +74,11 @@ class Employee implements IBasic
     public function getAllAsObjects(): array
     {
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM mitarbeiter';
+        $sql = 'SELECT * FROM employee';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        $mitarbeiter = $stmt->fetchAll(PDO::FETCH_CLASS, 'Employee');
-        return $mitarbeiter;
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Employee');
     }
 
     /**
@@ -88,7 +88,7 @@ class Employee implements IBasic
     public function deleteObjectById(int $id): void
     {
         $pdo = Db::getConnection();
-        $sql = 'DELETE FROM mitarbeiter WHERE id=?';
+        $sql = 'DELETE FROM employee WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
     }
@@ -99,7 +99,7 @@ class Employee implements IBasic
                            float  $salary): Employee
     {
         $pdo = Db::getConnection();
-        $sql = 'INSERT INTO mitarbeiter VALUES(NULL,?,?,?,?)';
+        $sql = 'INSERT INTO employee VALUES(NULL,?,?,?,?)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$firstName, $lastName, $gender, $salary]);
         $id = $pdo->lastInsertId();
@@ -109,17 +109,17 @@ class Employee implements IBasic
     public function getObjectById(int $id): Employee
     {
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM mitarbeiter WHERE id=?';
+        $sql = 'SELECT * FROM employee WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        $mitarbeiter = $stmt->fetchObject('Employee');
-        return $mitarbeiter;
+
+        return $stmt->fetchObject('Employee');
     }
 
     public function update(): void
     {
         $pdo = Db::getConnection();
-        $sql = 'UPDATE mitarbeiter SET firstName=?, lastName=?, gender=?, salary=? WHERE id=?';
+        $sql = 'UPDATE employee SET firstName=?, lastName=?, gender=?, salary=? WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$this->firstName, $this->lastName, $this->gender, $this->salary, $this->id]);
     }

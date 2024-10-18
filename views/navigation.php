@@ -1,5 +1,5 @@
-<a href="index.php?action=showTabelle&area=mitarbeiter"> <button>zur Tabelle Mitarbeiter</button></a>
-<a href="index.php?action=showEingabe&area=mitarbeiter"> <button>zur Eingabe Mitarbeiter</button></a>
-<a href="index.php?action=showTabelle&area=auto"> <button>zur Tabelle Auto</button></a>
-<a href="index.php?action=showEingabe&area=auto"> <button>zur Eingabe Auto</button></a>
+<a href="index.php?action=showTable&area=employee"> <button>zur Tabelle Mitarbeiter</button></a>
+<a href="index.php?action=showEdit&area=employee"> <button>zur Eingabe Mitarbeiter</button></a>
+<a href="index.php?action=showTable&area=car"> <button>zur Tabelle Auto</button></a>
+<a href="index.php?action=showEdit&area=car"> <button>zur Eingabe Auto</button></a>
 
