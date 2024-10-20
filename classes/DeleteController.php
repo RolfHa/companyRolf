@@ -4,7 +4,6 @@ class DeleteController
 {
     private string $area;
     private string $view;
-    private int $id;
     public function __construct(string $area, string &$view)
     {
         $this->area = $area;

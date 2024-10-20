@@ -5,12 +5,12 @@ class updateController
     private string $area;
     private string $view;
 
-    public function __construct(string $area, string &$view, )
+    public function __construct(string $area, string &$view )
     {
         $this->area = $area;
         $view = 'table';
     }
-    public function tuwas(array $postData):array
+    public function invoke(array $postData):array
     {
         $this->view = 'table';
         if ($this->area === 'employee'){

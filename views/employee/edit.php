@@ -46,7 +46,7 @@ if (isset($e)){
             <td><label>Geschlecht:</td>
             <td>
                 <input type="radio" name="gender" value="weiblich" <?php echo $genderW; ?>>weiblich
-                <input type="radio" name="gender" value="maennlich" <?php echo $genderM; ?>>männlich
+                <input type="radio" name="gender" value="männlich" <?php echo $genderM; ?>>männlich
                 <input type="radio" name="gender" value="divers" <?php echo $genderD; ?>>divers
                 </label></td>
         </tr>
