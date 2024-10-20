@@ -21,4 +21,3 @@ INSERT INTO employee VALUES(1, 'Peter', 'Pan', 'männlich', 2001.22);
 INSERT INTO employee VALUES(2, 'Claudia', 'Clein', 'weiblich', 3009.22);
 INSERT INTO car VALUES(1, 'B-BQ 1', 'BMW', '333i');
 INSERT INTO car VALUES(2, 'B-BQ 12', 'VW', 'Golf');
---
