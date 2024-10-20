@@ -4,7 +4,6 @@ class updateController
 {
     private string $area;
     private string $view;
-    private array $postData;
 
     public function __construct(string $area, string &$view, )
     {
