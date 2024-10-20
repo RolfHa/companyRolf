@@ -4,15 +4,15 @@ $genderW = ' checked';
 $genderM = '';
 $genderD = '';
 
-if (isset($m)){
-    if ($m->getGender() === 'weiblich') {
+if (isset($e)){
+    if ($e->getGender() === 'weiblich') {
         $genderW = ' checked';
     }
-    if ($m->getGender() === 'männlich') {
+    if ($e->getGender() === 'männlich') {
         $genderM = ' checked';
         $genderW = '';
     }
-    if ($m->getGender() === 'divers') {
+    if ($e->getGender() === 'divers') {
         $genderD = ' checked';
         $genderW = '';
     }
@@ -32,15 +32,15 @@ if (isset($m)){
 <?php include 'views/navigation.php'; ?>
 <form action="index.php" method="post">
     <input type="hidden" name="action" value="<?php echo $action; ?>">
-    <input type="hidden" name="id" value="<?php echo (isset($m) && ($m instanceof Employee)) ? $m->getId() : ''; ?>">
+    <input type="hidden" name="id" value="<?php echo (isset($e) && ($e instanceof Employee)) ? $e->getId() : ''; ?>">
     <table>
         <tr>
             <td><label>Vorname:</td>
-            <td><input name="firstName" value="<?php echo (isset($m) && ($m instanceof Employee)) ? $m->getFirstName() : ''; ?>"></label></td>
+            <td><input name="firstName" value="<?php echo (isset($e) && ($e instanceof Employee)) ? $e->getFirstName() : ''; ?>"></label></td>
         </tr>
         <tr>
             <td><label>Nachname:</td>
-            <td><input name="lastName" value="<?php echo (isset($m) && ($m instanceof Employee)) ? $m->getLastName() : ''; ?>"></label></td>
+            <td><input name="lastName" value="<?php echo (isset($e) && ($e instanceof Employee)) ? $e->getLastName() : ''; ?>"></label></td>
         </tr>
         <tr>
             <td><label>Geschlecht:</td>
@@ -52,7 +52,7 @@ if (isset($m)){
         </tr>
         <tr>
             <td><label>Monatslohn:</td>
-            <td><input name="salary" type="number" step="0.01" value="<?php echo (isset($m) && ($m instanceof Employee)) ? $m->getSalary() : ''; ?>"></label></td>
+            <td><input name="salary" type="number" step="0.01" value="<?php echo (isset($e) && ($e instanceof Employee)) ? $e->getSalary() : ''; ?>"></label></td>
         </tr>
         <tr>
             <td></td>

@@ -13,7 +13,7 @@ print_r($_POST);
 echo '</pre>';
 
 $action = $_REQUEST['action'] ?? 'showTable'; // $_REQUEST = $_GET und $_POST
-$id = $_REQUEST['id'] ?? '0';
+$id = $_REQUEST['id'] ?? null;
 $firstName = $_POST['firstName'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
 $gender = $_POST['gender'] ?? '';
@@ -34,7 +34,7 @@ if ($action === 'showTable') {
 //    $view = 'tabelle';
     $controllerName = ucfirst($action) . 'Controller';
     $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
-    $array = $controller->tuwas();
+    $array = $controller->invoke($area);
     // korrekte Namen für edit.php
     if ($area == 'employee') {
         $employees = $array;
@@ -50,18 +50,17 @@ if ($action === 'showTable') {
 //    }
 
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, $id);
-    $array = $controller->tuwas();
+    $controller = new $controllerName($area, $view);
+    $array = $controller->invoke($id);
     if (count($array) > 0) {
         if ($area == 'employee') {
-            $m = $array[0];
+            $e = $array[0];
         } elseif ($area === 'car') {
             $c = $array[0];
         }
     }
-    if ($id != 0) {
+    if (isset($id)) {
         $action = 'update';
-
     } else {
         $action = 'insert';
     }
@@ -79,8 +78,8 @@ if ($action === 'showTable') {
 //    }
     //$view = 'table';
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, $id);
-    $array = $controller->tuwas();
+    $controller = new $controllerName($area, $view);
+    $array = $controller->invoke($id);
     // korrekte Namen für edit.php
     if ($area == 'employee') {
         $employees = $array;

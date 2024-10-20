@@ -12,11 +12,10 @@ class showTableController
     public function __construct(string $area, string &$view)
     {
         $this->area = $area;
-        $this->setView();
-        $view = $this->view;
+        $view = 'table';
     }
 
-    public function tuwas() : array
+    public function invoke(string $area) : array
     {
 
         if ($this->area === 'employee') {

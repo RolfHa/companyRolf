@@ -8,31 +8,18 @@ class ShowEditController
     public function __construct(string $area, string &$view, int $id = null)
     {
         $this->area = $area;
-        $this->id = $id;
-        $this->tuwas();
-        $view = $this->view;
+        $view = 'edit';
     }
 
-    public function tuwas(): array
+    public function invoke($id = null): array
     {
-        $this->view = 'edit';
-        if ($this->area === 'employee') {
-            $employees = (new Employee())->getAllAsObjects();
-            return $employees;
-        } elseif ($this->area === 'auto') {
-            $cars = (new Car())->getAllAsObjects();
-            return $cars;
-//        }
+        if (isset($id)) {
             if ($this->area === 'employee') {
-                return [(new Employee())->getObjectById($this->id)];
+                return [(new Employee())->getObjectById($id)];
             } elseif ($this->area === 'car') {
-                return [(new Car())->getObjectById($this->id)];
-            } else {
-                return [];
-
-
+                return [(new Car())->getObjectById($id)];
             }
         }
-
+        return [];
     }
 }
