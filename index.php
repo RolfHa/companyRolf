@@ -96,13 +96,13 @@ if ($action === 'showTable') {
 //    }
 //    $view = 'table';
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, ['firstName' => $firstName, 'lastName' => $lastName
-        , 'gender' => $gender, 'salary' => $salary
-        , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
-    ]);  // $view wird im Konstruktor überschrieben
+    $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
 
     //$controller = new $controllerName($area, $view, $object);  // $view wird im Konstruktor überschrieben
-    $array = $controller->tuwas();
+    $array = $controller->invoke(['firstName' => $firstName, 'lastName' => $lastName
+        , 'gender' => $gender, 'salary' => $salary
+        , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
+    ]);
 // korrekte Namen für edit.php
     if ($area == 'employee') {
         $employees = $array;

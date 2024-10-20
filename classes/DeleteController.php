@@ -12,13 +12,6 @@ class DeleteController
     }
     public function invoke(int $id) : array
     {
-//        if ($this->area === 'employee') {
-//            $employees = (new Employee())->getAllAsObjects();
-//            return $employees;
-//        } elseif ($this->area === 'auto') {
-//            $cars = (new Car())->getAllAsObjects();
-//            return $cars;
-//        }
         if ($this->area === 'employee'){
             (new Employee())->deleteObjectById($id);
         }elseif ($this->area === 'car'){

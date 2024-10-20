@@ -6,30 +6,28 @@ class updateController
     private string $view;
     private array $postData;
 
-    public function __construct(string $area, string &$view, array $postData)
+    public function __construct(string $area, string &$view, )
     {
         $this->area = $area;
-        $this->postData = $postData;
-        //$this->tuwas();
-        //$view = $this->view;
         $view = 'table';
     }
-    public function tuwas():array
+    public function tuwas(array $postData):array
     {
         $this->view = 'table';
         if ($this->area === 'employee'){
-            (new Employee( $this->postData['id'] ,$this->postData['firstName'], $this->postData['lastName'],
-                $this->postData['gender'], $this->postData['salary']))->update();
+            (new Employee( $postData['id'] ,$postData['firstName'], $postData['lastName'],
+                $postData['gender'], $postData['salary']))->update();
         } elseif ($this->area === 'car'){
-            (new Car($this->postData['id'], $this->postData['numberPlate'], $this->postData['maker'],
-                $this->postData['type']))->update();
+            (new Car($postData['id'], $postData['numberPlate'], $postData['maker'],
+                $postData['type']))->update();
         }
+
+        $array = [];
         if ($this->area === 'employee') {
-            $employees = (new Employee())->getAllAsObjects();
-            return $employees;
+            $array = (new Employee())->getAllAsObjects();
         } elseif ($this->area === 'car') {
-            $cars = (new Car())->getAllAsObjects();
-            return $cars;
+            $array = (new Car())->getAllAsObjects();
         }
+        return $array;
     }
 }

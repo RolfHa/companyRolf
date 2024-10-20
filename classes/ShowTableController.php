@@ -27,10 +27,5 @@ class showTableController
         }
 
     }
-    public function setView():void
-    {
-        $this->view = 'table';
-    }
-
 
 }

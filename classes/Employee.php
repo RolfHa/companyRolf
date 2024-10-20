@@ -43,26 +43,41 @@ class Employee implements IBasic
         }
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
+    /**
+     * @return string
+     */
     public function getLastName(): string
     {
         return $this->lastName;
     }
 
+    /**
+     * @return string|null
+     */
     public function getGender(): ?string
     {
         return $this->gender;
     }
 
+    /**
+     * @return float
+     */
     public function getSalary(): float
     {
         return $this->salary;
@@ -93,6 +108,13 @@ class Employee implements IBasic
         $stmt->execute([$id]);
     }
 
+    /**
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $gender
+     * @param float $salary
+     * @return Employee
+     */
     public function insert(string $firstName,
                            string $lastName,
                            string $gender,
@@ -106,6 +128,10 @@ class Employee implements IBasic
         return new Employee($id, $firstName, $lastName, $gender, $salary);
     }
 
+    /**
+     * @param int $id
+     * @return Employee
+     */
     public function getObjectById(int $id): Employee
     {
         $pdo = Db::getConnection();
@@ -116,6 +142,9 @@ class Employee implements IBasic
         return $stmt->fetchObject('Employee');
     }
 
+    /**
+     * @return void
+     */
     public function update(): void
     {
         $pdo = Db::getConnection();
