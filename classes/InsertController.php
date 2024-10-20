@@ -14,8 +14,6 @@ class InsertController
     {
         $this->area = $area;
         $this->postData = $postData;
-        //$this->tuwas();
-        //$view = $this->view;
         $view = 'table';
     }
     public function tuwas():array
