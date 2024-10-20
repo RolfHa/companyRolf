@@ -15,7 +15,7 @@ class showTableController
         $view = 'table';
     }
 
-    public function invoke(string $area) : array
+    public function invoke() : array
     {
 
         if ($this->area === 'employee') {

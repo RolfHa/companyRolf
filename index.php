@@ -28,7 +28,7 @@ $view = 'table';
 if ($action === 'showTable') {
     $controllerName = ucfirst($action) . 'Controller';
     $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
-    $array = $controller->invoke($area);
+    $array = $controller->invoke();
     // korrekte Namen für edit.php
     if ($area == 'employee') {
         $employees = $array;
