@@ -9,7 +9,7 @@ class showTableController
      * @param string $area
      * @param string $view
      */
-    public function __construct(string $area, string &$view)
+    public function __construct(string $area, string &$view, array $requestData = null)
     {
         $this->area = $area;
         $view = 'table';

@@ -37,8 +37,8 @@ if ($action === 'showTable') {
     }
 } elseif ($action === 'showEdit') {
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);
-    $array = $controller->invoke($id);
+    $controller = new $controllerName($area, $view, $id);
+    $array = $controller->invoke();
     if (count($array) > 0) {
         if ($area == 'employee') {
             $e = $array[0];
@@ -53,8 +53,8 @@ if ($action === 'showTable') {
     }
 } elseif ($action === 'delete') {
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);
-    $array = $controller->invoke($id);
+    $controller = new $controllerName($area, $view, $id);
+    $array = $controller->invoke();
     // korrekte Namen für edit.php
     if ($area == 'employee') {
         $employees = $array;
@@ -63,12 +63,12 @@ if ($action === 'showTable') {
     }
 } elseif ($action === 'insert') {
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);
-    $array = $controller->invoke(['firstName' => $firstName, 'lastName' => $lastName
+    $controller = new $controllerName($area, $view, ['firstName' => $firstName, 'lastName' => $lastName
         , 'gender' => $gender, 'salary' => $salary
         , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
     ]);
-// korrekte Namen für edit.php
+    $array = $controller->invoke();
+
     if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
@@ -76,11 +76,11 @@ if ($action === 'showTable') {
     }
 } elseif ($action === 'update') {
     $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);
-    $array = $controller->invoke(['id' => $id, 'firstName' => $firstName, 'lastName' => $lastName
+    $controller = new $controllerName($area, $view, ['id' => $id, 'firstName' => $firstName, 'lastName' => $lastName
         , 'gender' => $gender, 'salary' => $salary
         , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
     ]);
+    $array = $controller->invoke();
     if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
