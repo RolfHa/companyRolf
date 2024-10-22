@@ -32,6 +32,8 @@ if (isset($e)){
 <?php include 'views/navigation.php'; ?>
 <form action="index.php" method="post">
     <input type="hidden" name="action" value="<?php echo $action; ?>">
+    <input type="hidden" name="area" value="<?php echo $area; ?>">
+
     <input type="hidden" name="id" value="<?php echo (isset($e) && ($e instanceof Employee)) ? $e->getId() : ''; ?>">
     <table>
         <tr>

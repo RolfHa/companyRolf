@@ -1,6 +1,6 @@
 <?php
 
-class ShowEditController
+class ShowEditController implements IController
 {
     /**
      * @var string
@@ -15,24 +15,41 @@ class ShowEditController
      */
     private int $id;
 
-    public function __construct(string $area, string &$view, int $id = null)
+    public function __construct(string $area)
     {
         $this->area = $area;
-        $view = 'edit';
-        if (isset($id)) {
-            $this->id = $id;
-        }
+        $this->view = 'edit';
+//        if (isset($id)) {
+//            $this->id = $id;
+//        }
     }
 
-    public function invoke(): array
+    public function invoke($getData, $postData): array
     {
-        if (isset($this->id)) {
+        if (isset($getData['id'])) {
             if ($this->area === 'employee') {
-                return [(new Employee())->getObjectById($this->id)];
+                $array = (new Employee())->getObjectById($getData['id']);
             } elseif ($this->area === 'car') {
-                return [(new Car())->getObjectById($this->id)];
+                $array = (new Car())->getObjectById($getData['id']);
             }
+            return ['action' => 'update', 'array' => $array];
         }
-        return [];
+        return ['action' => 'insert' ];
     }
+
+    public function getArea(): string
+    {
+        return $this->area;
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 }

@@ -14,78 +14,48 @@ echo '</pre>';
 
 $action = $_REQUEST['action'] ?? 'showTable';
 $id = $_REQUEST['id'] ?? null;
-$firstName = $_POST['firstName'] ?? '';
-$lastName = $_POST['lastName'] ?? '';
-$gender = $_POST['gender'] ?? '';
-$salaryStr = $_POST['salary'] ?? '';
-$salary = (float)$salaryStr;
 $area = $_REQUEST['area'] ?? 'employee';
-$numberPlate = $_POST['numberPlate'] ?? '';
-$maker = $_POST['maker'] ?? '';
-$type = $_POST['type'] ?? '';
 
-$view = 'table';
-if ($action === 'showTable') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view);  // $view wird im Konstruktor überschrieben
-    $array = $controller->invoke();
-    // korrekte Namen für edit.php
-    if ($area == 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
+// verkürzt
+$postData = [];
+$postDataNames = ['firstName', 'lastName', 'gender', 'salary', 'maker', 'type', 'numberPlate', 'area', 'id', 'action'];
+foreach ($postDataNames as $field) {
+    $value = $_POST[$field] ?? null;
+    if (!empty($value)) {
+        $postData[$field] = $value;
     }
-} elseif ($action === 'showEdit') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, $id);
-    $array = $controller->invoke();
-    if (count($array) > 0) {
-        if ($area == 'employee') {
-            $e = $array[0];
-        } elseif ($area === 'car') {
-            $c = $array[0];
-        }
-    }
-    if (isset($id)) {
-        $action = 'update';
-    } else {
-        $action = 'insert';
-    }
-} elseif ($action === 'delete') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, $id);
-    $array = $controller->invoke();
-    // korrekte Namen für edit.php
-    if ($area == 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
-} elseif ($action === 'insert') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, ['firstName' => $firstName, 'lastName' => $lastName
-        , 'gender' => $gender, 'salary' => $salary
-        , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
-    ]);
-    $array = $controller->invoke();
-
-    if ($area == 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
-} elseif ($action === 'update') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $view, ['id' => $id, 'firstName' => $firstName, 'lastName' => $lastName
-        , 'gender' => $gender, 'salary' => $salary
-        , 'numberPlate' => $numberPlate, 'maker' => $maker, 'type' => $type
-    ]);
-    $array = $controller->invoke();
-    if ($area == 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
+}
+$getData = [];
+$getDataNames = ['id', 'area', 'action'];
+foreach ($getDataNames as $field) {
+    $value = $_GET[$field] ?? null;
+    if (!empty($value)) {
+        $getData[$field] = $value;
     }
 }
 
-include 'views/' . $area . '/' . $view . '.php';
+$view = 'table';
+$possibleActions = ['showTable', 'showEdit', 'insert', 'update', 'delete'];
+if (in_array($action, $possibleActions)) {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area);
+
+    $array = $controller->invoke($getData, $postData);
+
+    if (isset($array['action']) && $array['action'] === 'insert'){
+        $action = 'insert';
+    } else {
+        $action = 'update';
+    }
+
+}
+// Variablennamen für table (z.B. $employees oder $cars)
+//echo $view;
+if ($controller->getView() === 'table') {
+    $arrayName = $area . 's';
+    $$arrayName = $array;
+} elseif ($controller->getView() === 'edit') { //Variablennamen für Objekte in edit (z.B. $e oder $c)
+        $objectName = substr($area, 0, 1);
+        $$objectName = $array['array'];
+}
+include 'views/' . $controller->getArea() . '/' . $controller->getView() . '.php';
