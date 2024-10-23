@@ -34,7 +34,7 @@ class ShowEditController implements IController
             }
             return ['action' => 'update', 'array' => $array];
         }
-        return ['action' => 'insert' ];
+        return ['action' => 'insert',[] ];
     }
 
     public function getArea(): string

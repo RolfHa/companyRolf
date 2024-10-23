@@ -18,20 +18,7 @@
         <th>Löschen</th>
         <th>Ändern</th>
     </tr>
-<!--    --><?php
-//    for ($i = 0; $i < count($employees); $i++) {
-//    ?>
-<!--    <tr>-->
-<!--        <td>--><?php //echo $employees[$i]->getFirstName(); ?><!--</td>-->
-<!--        <td>--><?php //echo $employees[$i]->getLastName(); ?><!--</td>-->
-<!--        <td>--><?php //echo $employees[$i]->getGender(); ?><!--</td>-->
-<!--        <td>--><?php //echo $employees[$i]->getSalary(); ?><!--</td>-->
-<!--        <td><a href="index.php?action=delete&id=--><?php //echo $employees[$i]->getId(); ?><!--"><button>Löschen</button></a></td>-->
-<!--        <td><a href="index.php?action=edit&id=--><?php //echo $employees[$i]->getId(); ?><!--"><button>Ändern</button></a></td>-->
-<!--    </tr>-->
-<!--    --><?php
-//    }
-//    ?>
+
     <?php
     foreach ($employees as $m ) :
         ?>

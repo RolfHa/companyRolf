@@ -2,7 +2,11 @@
 
 include 'config.php';
 spl_autoload_register(function ($className): void {
-    include 'classes/' . $className . '.php';
+    if (substr($className, -10) === 'Controller'){
+        include 'controllers/' . $className . '.php';
+    } else {
+        include 'classes/' . $className . '.php';
+    }
 });
 
 echo '<pre>';
@@ -12,9 +16,9 @@ echo '$_POST ';
 print_r($_POST);
 echo '</pre>';
 
-$action = $_REQUEST['action'] ?? 'showTable';
+$action = $_REQUEST['action'] ?? 'showTable'; // Standardwert
 $id = $_REQUEST['id'] ?? null;
-$area = $_REQUEST['area'] ?? 'employee';
+$area = $_REQUEST['area'] ?? 'employee'; // Standardwert
 
 // verkürzt
 $postData = [];
@@ -34,7 +38,8 @@ foreach ($getDataNames as $field) {
     }
 }
 
-$view = 'table';
+// Erstellen des Controllernamens und Aufruf des entsprechenden Controllers
+// der controller erstellt auch $view
 $possibleActions = ['showTable', 'showEdit', 'insert', 'update', 'delete'];
 if (in_array($action, $possibleActions)) {
     $controllerName = ucfirst($action) . 'Controller';
@@ -49,13 +54,16 @@ if (in_array($action, $possibleActions)) {
     }
 
 }
-// Variablennamen für table (z.B. $employees oder $cars)
+
+// Variablennamen für table (z.B. $employees oder $cars) und Objekte (z.B. $e oder $c)
 //echo $view;
 if ($controller->getView() === 'table') {
     $arrayName = $area . 's';
     $$arrayName = $array;
 } elseif ($controller->getView() === 'edit') { //Variablennamen für Objekte in edit (z.B. $e oder $c)
+     if (isset($array['array'])){ // nur bei update Vorbelegung der input-Felder
         $objectName = substr($area, 0, 1);
         $$objectName = $array['array'];
+     }
 }
 include 'views/' . $controller->getArea() . '/' . $controller->getView() . '.php';

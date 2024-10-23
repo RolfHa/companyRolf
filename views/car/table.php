@@ -17,31 +17,22 @@
         <th>Löschen</th>
         <th>Ändern</th>
     </tr>
-<!--    --><?php
-//    for ($i = 0; $i < count($ms); $i++) {
-//    ?>
-<!--    <tr>-->
-<!--        <td>--><?php //echo $ms[$i]->getFirstName(); ?><!--</td>-->
-<!--        <td>--><?php //echo $ms[$i]->getLastName(); ?><!--</td>-->
-<!--        <td>--><?php //echo $ms[$i]->getGender(); ?><!--</td>-->
-<!--        <td>--><?php //echo $ms[$i]->getSalary(); ?><!--</td>-->
-<!--        <td><a href="index.php?action=delete&id=--><?php //echo $ms[$i]->getId(); ?><!--"><button>Löschen</button></a></td>-->
-<!--        <td><a href="index.php?action=edit&id=--><?php //echo $ms[$i]->getId(); ?><!--"><button>Ändern</button></a></td>-->
-<!--    </tr>-->
-<!--    --><?php
-//    }
-//    ?>
+
     <?php
-    foreach ($cars as $c ) :
+    foreach ($cars as $c) :
         ?>
         <tr>
             <td><?php echo $c->getNumberPlate(); ?></td>
             <td><?php echo $c->getMaker(); ?></td>
             <td><?php echo $c->getType(); ?></td>
-            <td><a href="index.php?action=delete&area=car&id=<?php echo $c->getId(); ?>"><button>Löschen</button></a></td>
-            <td><a href="index.php?action=showEdit&area=car&id=<?php echo $c->getId(); ?>"><button>Ändern</button></a></td>
+            <td><a href="index.php?action=delete&area=car&id=<?php echo $c->getId(); ?>">
+                    <button>Löschen</button>
+                </a></td>
+            <td><a href="index.php?action=showEdit&area=car&id=<?php echo $c->getId(); ?>">
+                    <button>Ändern</button>
+                </a></td>
         </tr>
-        <?php
+    <?php
     endforeach;
     ?>
 </table>

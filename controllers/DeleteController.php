@@ -1,22 +1,32 @@
 <?php
 
-class DeleteController
+class DeleteController implements IController
 {
+
     private string $area;
     private string $view;
-    private int $id;
-    public function __construct(string $area, string &$view, int $id)
+
+    public function getArea(): string
+    {
+        return $this->area;
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
+    }
+    public function __construct(string $area)
     {
         $this->area = $area;
-        $view = 'table';
-        $this->id = $id;
+        $this->view = 'table';
+
     }
-    public function invoke() : array
+    public function invoke($getData, $postData) : array
     {
         if ($this->area === 'employee'){
-            (new Employee())->deleteObjectById($this->id);
+            (new Employee())->deleteObjectById($getData['id']);
         }elseif ($this->area === 'car'){
-            (new Car())->deleteObjectById($this->id);
+            (new Car())->deleteObjectById($getData['id']);
         }
         if ($this->area === 'employee') {
             $employees = (new Employee())->getAllAsObjects();
