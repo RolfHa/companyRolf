@@ -16,7 +16,6 @@ class Car implements IBasic
      */
     public function __construct(?int $id = null, ?string $numberPlate = null, ?string $maker = null, ?string $type = null)
     {
-        echo $id;
         if ($id !== null) {
             $this->id = $id;
             $this->numberPlate = $numberPlate;
@@ -91,5 +90,17 @@ class Car implements IBasic
         $sql = 'UPDATE car SET numberPlate=?, maker=?, type=? WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$this->numberPlate, $this->maker, $this->type, $this->id]);
+    }
+
+    public function getPulldown()
+    {
+        $cars = $this->getAllAsObjects();
+        $html = '<select name="carId">';
+        foreach ($cars as $c){
+            $html .= '<option value="'. $c->getId() . '">' .  $c->getNumberPlate() . '</option>';
+        }
+        $html .= '</select>';
+
+        return $html;
     }
 }

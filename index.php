@@ -22,7 +22,8 @@ $area = $_REQUEST['area'] ?? 'employee'; // Standardwert
 
 // verkürzt
 $postData = [];
-$postDataNames = ['firstName', 'lastName', 'gender', 'salary', 'maker', 'type', 'numberPlate', 'area', 'id', 'action'];
+$postDataNames = ['firstName', 'lastName', 'gender', 'salary', 'maker', 'type', 'numberPlate',
+    'area', 'id', 'action', 'employeeId', 'carId', 'startDate', 'endDate'];
 foreach ($postDataNames as $field) {
     $value = $_POST[$field] ?? null;
     if (!empty($value)) {
@@ -46,7 +47,7 @@ if (in_array($action, $possibleActions)) {
     $controller = new $controllerName($area);
 
     $array = $controller->invoke($getData, $postData);
-
+    print_r($array);
     if (isset($array['action']) && $array['action'] === 'insert'){
         $action = 'insert';
     } else {

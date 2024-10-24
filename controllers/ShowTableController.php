@@ -21,6 +21,8 @@ class showTableController implements IController
             $array = (new Employee())->getAllAsObjects();
         } elseif ($this->area === 'car') {
             $array = (new Car())->getAllAsObjects();
+        } elseif ($this->area === 'rental') {
+            $array = (new Rental())->getAllAsObjects();
         }
         return  $array;
 

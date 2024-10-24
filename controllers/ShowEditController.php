@@ -31,6 +31,8 @@ class ShowEditController implements IController
                 $array = (new Employee())->getObjectById($getData['id']);
             } elseif ($this->area === 'car') {
                 $array = (new Car())->getObjectById($getData['id']);
+            } elseif ($this->area === 'rental') {
+                $array = (new Rental())->getObjectById($getData['id']);
             }
             return ['action' => 'update', 'array' => $array];
         }

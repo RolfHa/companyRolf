@@ -3,19 +3,114 @@
 class Rental implements IBasic
 {
 
+    private int $id;
+    private int $employeeId;
+    private int $carId;
+    /**
+     * @var string
+     * soll später in ein date-Objekt überführt werden
+     */
+    private string $startDate;
+    /**
+     * @var ?string $endDate ;
+     */
+    private string $endDate;
 
-    public function getObjectById(int $id)
+    /**
+     * @param ?int $id
+     * @param ?int $employeeId
+     * @param ?int $carId
+     * @param ?string $startDate
+     * @param ?string|null $endDate
+     */
+    public function __construct(?int $id = null, ?int $employeeId = null, ?int $carId = null, ?string $startDate = null, ?string $endDate = null)
     {
-        // TODO: Implement getObjectById() method.
+        if ($id !== null) {
+            $this->id = $id;
+            $this->employeeId = $employeeId;
+            $this->carId = $carId;
+            $this->startDate = $startDate;
+            $this->endDate = $endDate;
+        }
     }
 
-    public function getAllAsObjects()
+    public function getId(): int
     {
-        // TODO: Implement getAllAsObjects() method.
+        return $this->id;
     }
 
-    public function deleteObjectById(int $id)
+    public function getEmployeeId(): int
     {
-        // TODO: Implement deleteObjectById() method.
+        return $this->employeeId;
+    }
+
+    public function getCarId(): int
+    {
+        return $this->carId;
+    }
+
+    public function getStartDate(): string
+    {
+        return $this->startDate;
+    }
+
+    public function getEndDate(): string
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param int $id
+     * @return ?Rental
+     */
+    public function getObjectById(int $id): Rental
+    {
+        $pdo = Db::getConnection();
+        $sql = 'SELECT * FROM rental WHERE id=?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $r = $stmt->fetchObject('Rental');
+        return $r;
+    }
+
+    /**
+     * @return Rental[]
+     */
+    public function getAllAsObjects(): array
+    {
+        $pdo = Db::getConnection();
+        $sql = 'SELECT * FROM rental';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $rentals = $stmt->fetchAll(PDO::FETCH_CLASS, 'Rental');
+        return $rentals;
+    }
+
+    public function deleteObjectById(int $id): void
+    {
+        $pdo = Db::getConnection();
+        $sql = 'DELETE FROM rental WHERE id=?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+    }
+
+    public function getName(): string
+    {
+        return (new Employee())->getObjectById($this->employeeId)->getName();
+    }
+
+    public function getNumberPlate(): string
+    {
+        return (new Car())->getObjectById($this->carId)->getNumberPlate();
+    }
+
+    public function getEmployeePulldown(): string
+    {
+        return (new Employee())->getPulldownMenu();
+    }
+
+    public function getCarPulldown(): string
+    {
+        return (new Car())->getPulldown();
     }
 }

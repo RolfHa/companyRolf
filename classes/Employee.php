@@ -152,4 +152,22 @@ class Employee implements IBasic
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$this->firstName, $this->lastName, $this->gender, $this->salary, $this->id]);
     }
+
+    public function getName(): string
+    {
+        return ($this->getFirstName() . ' ' . $this->getLastName());
+    }
+
+    public function getPulldownMenu(): string
+    {
+        $employees = $this->getAllAsObjects();
+        $html = '<select name="employeeId">';
+        foreach ($employees as $e){
+            $html .= '<option value="'. $e->getId() . '">' .  $e->getName() . '</option>';
+        }
+        $html .= '</select>';
+
+        return $html;
+    }
+
 }
