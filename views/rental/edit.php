@@ -1,20 +1,7 @@
 <?php
-$rentalDataExists = (isset($r)) ? true : false;
+$rentalDataExists = (isset($r) && $r->getId() !== null) ? true : false;
 $r = (!$rentalDataExists) ? new Rental() : $r;
-// Vorbelegen der pulldownss
-if ($rentalDataExists){
-    if ($e->getGender() === 'weiblich') {
-        $genderW = ' checked';
-    }
-    if ($e->getGender() === 'männlich') {
-        $genderM = ' checked';
-        $genderW = '';
-    }
-    if ($e->getGender() === 'divers') {
-        $genderD = ' checked';
-        $genderW = '';
-    }
-}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,8 +21,8 @@ if ($rentalDataExists){
     <table>
         <tr><td><label>Mitarbeiter </td><td><?php echo $r->getEmployeePulldown(); ?></label></td></tr>
         <tr><td><label>Kennzeichen: </td><td><?php echo $r->getCarPulldown(); ?></label></td></tr>
-        <tr><td><label>Typ: </td><td><input name="startDate" type="datetime-local"  value=""></label></td></tr>
-        <tr><td><label>Typ: </td><td><input name="endDate" type="datetime-local"  value=""></label></td></tr>
+        <tr><td><label>von: </td><td><input name="startDate" type="text"  value="<?php echo ($r instanceof Rental && $rentalDataExists === true) ? $r->getStartDate() : ''; ?>"></label></td></tr>
+        <tr><td><label>bis: </td><td><input name="endDate" type="text"  value="<?php echo ($r instanceof Rental && $rentalDataExists === true) ? $r->getEndDate() : ''; ?>"></label></td></tr>
         <tr><td></td><td><input type="reset"> <input type="submit" value="OK"></td></tr>
     </table>
 </form>

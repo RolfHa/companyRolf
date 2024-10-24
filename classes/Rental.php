@@ -39,7 +39,10 @@ class Rental implements IBasic
         return $this->id;
     }
 
-    public function getEmployeeId(): int
+    /**
+     * @return int|null
+     */
+    public function getEmployeeId(): ?int
     {
         return $this->employeeId;
     }
@@ -106,11 +109,19 @@ class Rental implements IBasic
 
     public function getEmployeePulldown(): string
     {
-        return (new Employee())->getPulldownMenu();
+        if (isset($this->id)) {
+            return (new Employee())->getPulldownMenu($this);
+        } else {
+            return (new Employee())->getPulldownMenu();
+        }
     }
 
     public function getCarPulldown(): string
     {
-        return (new Car())->getPulldown();
+        if (isset($this->id)) {
+            return (new Car())->getPulldownMenu($this);
+        } else {
+            return (new Car())->getPulldownMenu();
+        }
     }
 }

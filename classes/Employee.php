@@ -158,12 +158,16 @@ class Employee implements IBasic
         return ($this->getFirstName() . ' ' . $this->getLastName());
     }
 
-    public function getPulldownMenu(): string
+    public function getPulldownMenu($rental = null): string
     {
         $employees = $this->getAllAsObjects();
         $html = '<select name="employeeId">';
         foreach ($employees as $e){
-            $html .= '<option value="'. $e->getId() . '">' .  $e->getName() . '</option>';
+            $selected = '';
+            if (isset($rental)){
+                $selected = ($e->getId() === $rental->getEmployeeId()) ? ' selected' : '';
+            }
+            $html .= '<option value="'. $e->getId() . '"' . $selected . '>' .  $e->getName() . '</option>';
         }
         $html .= '</select>';
 

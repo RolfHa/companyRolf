@@ -92,12 +92,16 @@ class Car implements IBasic
         $stmt->execute([$this->numberPlate, $this->maker, $this->type, $this->id]);
     }
 
-    public function getPulldown()
+    public function getPulldownMenu($rental = null): string
     {
         $cars = $this->getAllAsObjects();
         $html = '<select name="carId">';
         foreach ($cars as $c){
-            $html .= '<option value="'. $c->getId() . '">' .  $c->getNumberPlate() . '</option>';
+            $selected = '';
+            if (isset($rental)){
+                $selected = ($c->getId() === $rental->getCarId()) ? ' selected' : '';
+            }
+            $html .= '<option value="'. $c->getId() . '"' . $selected . '>' .  $c->getNumberPlate() . '</option>';
         }
         $html .= '</select>';
 
