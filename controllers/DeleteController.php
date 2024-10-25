@@ -25,14 +25,19 @@ class DeleteController implements IController
     {
         if ($this->area === 'employee'){
             (new Employee())->deleteObjectById($getData['id']);
-        }elseif ($this->area === 'car'){
+        } elseif ($this->area === 'car'){
             (new Car())->deleteObjectById($getData['id']);
+        } elseif ($this->area === 'rental'){
+            (new Rental())->deleteObjectById($getData['id']);
         }
         if ($this->area === 'employee') {
             $employees = (new Employee())->getAllAsObjects();
             return $employees;
         } elseif ($this->area === 'car') {
             $cars = (new Car())->getAllAsObjects();
+            return $cars;
+        } elseif ($this->area === 'rental') {
+            $cars = (new Rental())->getAllAsObjects();
             return $cars;
         }
         return [];

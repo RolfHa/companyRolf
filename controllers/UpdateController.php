@@ -21,6 +21,9 @@ class updateController
         } elseif ($this->area === 'car'){
             (new Car($postData['id'], $postData['numberPlate'], $postData['maker'],
                 $postData['type']))->update();
+        } elseif ($this->area === 'rental'){
+            (new Rental($postData['id'], $postData['employeeId'], $postData['carId'],
+                $postData['startDate'], $postData['endDate']))->update();
         }
 
         $array = [];
@@ -28,6 +31,9 @@ class updateController
             $array = (new Employee())->getAllAsObjects();
         } elseif ($this->area === 'car') {
             $array = (new Car())->getAllAsObjects();
+        }
+        elseif ($this->area === 'rental') {
+            $array = (new Rental())->getAllAsObjects();
         }
         return $array;
     }

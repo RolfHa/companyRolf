@@ -41,19 +41,23 @@ class InsertController implements IController
 //        return [];
 
         if ($this->area === 'employee'){
-
             $postData = (new FilterData($postData)) -> filter(); //echo 'nachher ';print_r($postData); echo '</pre>';
             $object = (new Employee())->insert($postData['firstName'], $postData['lastName'],
-                $postData['gender'], $postData['salary']);
+                $postData['gender'], $postData['salary'], );
         } elseif ($this->area === 'car'){
             $object = (new Car())->insert($postData['numberPlate'], $postData['maker'],
                 $postData['type']);
+        } elseif ($this->area === 'rental'){
+            $object = (new Rental())->insert($postData['carId'], $postData['employeeId'],
+                $postData['startDate'], $postData['endDate']);
         }
         $array = [];
         if ($this->area === 'employee') {
             $array = (new Employee())->getAllAsObjects();
         } elseif ($this->area === 'car') {
             $array = (new Car())->getAllAsObjects();
+        }  elseif ($this->area === 'rental') {
+            $array = (new Rental())->getAllAsObjects();
         }
         return $array;
         return [];

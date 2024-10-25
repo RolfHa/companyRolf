@@ -29,8 +29,9 @@ class Rental implements IBasic
             $this->id = $id;
             $this->employeeId = $employeeId;
             $this->carId = $carId;
-            $this->startDate = $startDate;
-            $this->endDate = $endDate;
+            // HTML datetime-local enthält ein 'T' als Trenner zwischen Tag und Uhrzeit
+            $this->startDate = str_replace('T', ' ', $startDate);
+            $this->endDate = str_replace('T', ' ', $endDate);
         }
     }
 
@@ -123,5 +124,27 @@ class Rental implements IBasic
         } else {
             return (new Car())->getPulldownMenu();
         }
+    }
+    public function insert(string $employeeId,
+                           string $carId,
+                           string $startDate,
+                           string $endDate): Rental
+    {
+        $pdo = Db::getConnection();
+        $sql = 'INSERT INTO rental VALUES(NULL,?,?,?,?)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$employeeId, $carId, $startDate, $endDate]);
+        $id = $pdo->lastInsertId();
+        return new Rental($id, $employeeId, $carId, $startDate, $endDate);
+    }
+    /**
+     * @return void
+     */
+    public function update(): void
+    {
+        $pdo = Db::getConnection();
+        $sql = 'UPDATE rental SET employeeId=?, carId=?, startDate=?, endDate=? WHERE id=?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$this->employeeId, $this->carId, $this->startDate, $this->endDate, $this->id]);
     }
 }

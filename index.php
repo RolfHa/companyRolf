@@ -47,7 +47,7 @@ if (in_array($action, $possibleActions)) {
     $controller = new $controllerName($area);
 
     $array = $controller->invoke($getData, $postData);
-    print_r($array);
+    
     if (isset($array['action']) && $array['action'] === 'insert'){
         $action = 'insert';
     } else {

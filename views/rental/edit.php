@@ -21,8 +21,8 @@ $r = (!$rentalDataExists) ? new Rental() : $r;
     <table>
         <tr><td><label>Mitarbeiter </td><td><?php echo $r->getEmployeePulldown(); ?></label></td></tr>
         <tr><td><label>Kennzeichen: </td><td><?php echo $r->getCarPulldown(); ?></label></td></tr>
-        <tr><td><label>von: </td><td><input name="startDate" type="text"  value="<?php echo ($r instanceof Rental && $rentalDataExists === true) ? $r->getStartDate() : ''; ?>"></label></td></tr>
-        <tr><td><label>bis: </td><td><input name="endDate" type="text"  value="<?php echo ($r instanceof Rental && $rentalDataExists === true) ? $r->getEndDate() : ''; ?>"></label></td></tr>
+        <tr><td><label>von: </td><td><input name="startDate" type="datetime-local"  value="<?php echo ($r instanceof Rental && $rentalDataExists === true) ? $r->getStartDate() : ''; ?>"></label></td></tr>
+        <tr><td><label>bis: </td><td><input name="endDate" type="datetime-local"  value="<?php echo ($r instanceof Rental && $rentalDataExists === true) ? $r->getEndDate() : ''; ?>"></label></td></tr>
         <tr><td></td><td><input type="reset"> <input type="submit" value="OK"></td></tr>
     </table>
 </form>
