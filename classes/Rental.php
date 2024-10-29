@@ -15,24 +15,41 @@ class Rental implements IBasic
      * @var ?string $endDate ;
      */
     private string $endDate;
+    /**
+     * @var ?Employee
+     */
+    private Employee $employee;
+    /**
+     * @var ?Car
+     */
+    private Car $car;
 
     /**
-     * @param ?int $id
-     * @param ?int $employeeId
-     * @param ?int $carId
-     * @param ?string $startDate
-     * @param ?string|null $endDate
+     * @param int|null $id
+     * @param int|null $employeeId
+     * @param int|null $carId
+     * @param string|null $startDate
+     * @param string|null $endDate
      */
     public function __construct(?int $id = null, ?int $employeeId = null, ?int $carId = null, ?string $startDate = null, ?string $endDate = null)
     {
         if ($id !== null) {
+
             $this->id = $id;
             $this->employeeId = $employeeId;
             $this->carId = $carId;
             // HTML datetime-local enthält ein 'T' als Trenner zwischen Tag und Uhrzeit
             $this->startDate = str_replace('T', ' ', $startDate);
             $this->endDate = str_replace('T', ' ', $endDate);
+            // $this->>employee = (new Employee())->$this->setObjects($employeeId) funktioniert hier nicht ??
+            // workaround im RentalController
         }
+    }
+
+    public function setObjects()
+    {
+        $this->employee = (new Employee())->getObjectById($this->employeeId);
+        $this->car = (new Car())->getObjectById($this->carId);
     }
 
     public function getId(): int
@@ -61,6 +78,22 @@ class Rental implements IBasic
     public function getEndDate(): string
     {
         return $this->endDate;
+    }
+
+    /**
+     * @return Employee
+     */
+    public function getEmployee(): Employee
+    {
+        return $this->employee;
+    }
+
+    /**
+     * @return Car
+     */
+    public function getCar(): Car
+    {
+        return $this->car;
     }
 
     /**
@@ -96,16 +129,6 @@ class Rental implements IBasic
         $sql = 'DELETE FROM rental WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-    }
-
-    public function getName(): string
-    {
-        return (new Employee())->getObjectById($this->employeeId)->getName();
-    }
-
-    public function getNumberPlate(): string
-    {
-        return (new Car())->getObjectById($this->carId)->getNumberPlate();
     }
 
     public function getEmployeePulldown(): string

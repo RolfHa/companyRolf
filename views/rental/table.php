@@ -19,13 +19,12 @@
         <th>Löschen</th>
         <th>Ändern</th>
     </tr>
-
     <?php
     foreach ($rentals as $r ) :
         ?>
         <tr>
-            <td><?php echo $r->getName(); ?></td>
-            <td><?php echo $r->getNumberPlate(); ?></td>
+            <td><?php echo $r->getEmployee()->getName(); ?></td>
+            <td><?php echo $r->getCar()->getNumberPlate(); ?></td>
             <td><?php echo $r->getStartDate(); ?></td>
             <td><?php echo $r->getEndDate(); ?></td>
             <td><a href="index.php?action=delete&area=rental&id=<?php echo $r->getId(); ?>"><button>Löschen</button></a></td>

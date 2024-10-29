@@ -23,6 +23,10 @@ class showTableController implements IController
             $array = (new Car())->getAllAsObjects();
         } elseif ($this->area === 'rental') {
             $array = (new Rental())->getAllAsObjects();
+            // workaround, set Objects wird im Konstrutor von Rental nicht bedient ??
+            foreach ($array as $r){
+                $r->setObjects();
+            }
         }
         return  $array;
 
