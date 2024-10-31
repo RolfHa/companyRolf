@@ -1,14 +1,10 @@
 <?php
 
-class updateController
+class updateController extends BaseController
 {
-    private string $area;
-    private string $view;
-   
-
     public function __construct(string $area)
     {
-        $this->area = $area;
+        parent::__construct($area);
         $view = 'table';
 
     }
@@ -34,18 +30,13 @@ class updateController
         }
         elseif ($this->area === 'rental') {
             $array = (new Rental())->getAllAsObjects();
+            // workaround, set Objects wird im Konstruktor von Rental nicht bedient ??
+            foreach ($array as $r){
+                $r->setObjects();
+            }
         }
+
         return $array;
-    }
-
-    public function getArea(): string
-    {
-        return $this->area;
-    }
-
-    public function getView(): string
-    {
-        return $this->view;
     }
 
 }

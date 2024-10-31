@@ -1,47 +1,21 @@
 <?php
 
-class InsertController implements IController
+class InsertController extends BaseController
 {
-    private string $area;
-    private string $view;
-
     /**
      * @param string $area
      * @param string $view
      */
     public function __construct(string $area)
     {
-        $this->area = $area;
+        parent::__construct($area);
         $this->view = 'table';
-    }
-
-    public function getArea(): string
-    {
-        return $this->area;
-    }
-
-    public function getView(): string
-    {
-        return $this->view;
     }
 
     public function invoke($getData, $postData):array
     {
-//        if ($this->area == 'employee' && count($postData) > 0) {
-//            (new Employee)->enterObject($delivery['firstname'], $delivery['surename'], $delivery['gender'], $delivery['salary']);
-//            return ['arrayType' => 'employees', 'data' => (new Employee)->getAllAsObjects()];
-//        } elseif ($this->area == 'car' && !empty($delivery)) {
-//            (new Car)->enterObject($delivery['producer'], $delivery['type'], $delivery['licensePlate']);
-//            return ['arrayType' => 'cars', 'data' => (new Car)->getAllAsObjects()];
-//        } elseif ($this->area == 'employee' && empty($delivery)) {
-//            return ['arrayType' => 'employees', 'data' => (new Employee)->getAllAsObjects()];
-//        } elseif ($this->area == 'car' && empty($delivery)) {
-//            return ['arrayType' => 'cars', 'data' => (new Car)->getAllAsObjects()];
-//        }
-//        return [];
-
         if ($this->area === 'employee'){
-            $postData = (new FilterData($postData)) -> filter(); //echo 'nachher ';print_r($postData); echo '</pre>';
+            $postData = (new FilterData($postData)) -> filter();
             $object = (new Employee())->insert($postData['firstName'], $postData['lastName'],
                 $postData['gender'], $postData['salary'], );
         } elseif ($this->area === 'car'){
@@ -58,9 +32,12 @@ class InsertController implements IController
             $array = (new Car())->getAllAsObjects();
         }  elseif ($this->area === 'rental') {
             $array = (new Rental())->getAllAsObjects();
+            // workaround, set Objects wird im Konstruktor von Rental nicht bedient ??
+            foreach ($array as $r){
+                $r->setObjects();
+            }
         }
         return $array;
-        return [];
     }
 
 }
