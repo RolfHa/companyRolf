@@ -1,23 +1,11 @@
 <?php
 
-class DeleteController implements IController
+class DeleteController extends BaseController
 {
 
-    private string $area;
-    private string $view;
-
-    public function getArea(): string
-    {
-        return $this->area;
-    }
-
-    public function getView(): string
-    {
-        return $this->view;
-    }
     public function __construct(string $area)
     {
-        $this->area = $area;
+        parent::__construct($area);
         $this->view = 'table';
 
     }
@@ -37,8 +25,12 @@ class DeleteController implements IController
             $cars = (new Car())->getAllAsObjects();
             return $cars;
         } elseif ($this->area === 'rental') {
-            $cars = (new Rental())->getAllAsObjects();
-            return $cars;
+            $rentals = (new Rental())->getAllAsObjects();
+            // workaround, set Objects wird im Konstruktor von Rental nicht bedient ??
+            foreach ($rentals as $r){
+                $r->setObjects();
+            }
+            return $rentals;
         }
         return [];
     }
