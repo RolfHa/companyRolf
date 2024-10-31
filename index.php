@@ -10,9 +10,8 @@ spl_autoload_register(function ($className): void {
 });
 
 //echo '<pre>';
-//echo '$_GET ';
 //print_r($_GET);
-//echo '$_POST ';
+//echo '<br>';
 //print_r($_POST);
 //echo '</pre>';
 

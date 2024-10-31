@@ -22,22 +22,11 @@ class InsertController extends BaseController
             $object = (new Car())->insert($postData['numberPlate'], $postData['maker'],
                 $postData['type']);
         } elseif ($this->area === 'rental'){
-            $object = (new Rental())->insert($postData['carId'], $postData['employeeId'],
+            $object = (new Rental())->insert($postData['employeeId'], $postData['carId'],
                 $postData['startDate'], $postData['endDate']);
         }
-        $array = [];
-        if ($this->area === 'employee') {
-            $array = (new Employee())->getAllAsObjects();
-        } elseif ($this->area === 'car') {
-            $array = (new Car())->getAllAsObjects();
-        }  elseif ($this->area === 'rental') {
-            $array = (new Rental())->getAllAsObjects();
-            // workaround, set Objects wird im Konstruktor von Rental nicht bedient ??
-            foreach ($array as $r){
-                $r->setObjects();
-            }
-        }
-        return $array;
+
+        return TableHelper::getAllObjectsByArea($this->area);
     }
 
 }

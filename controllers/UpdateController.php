@@ -22,21 +22,7 @@ class updateController extends BaseController
                 $postData['startDate'], $postData['endDate']))->update();
         }
 
-        $array = [];
-        if ($this->area === 'employee') {
-            $array = (new Employee())->getAllAsObjects();
-        } elseif ($this->area === 'car') {
-            $array = (new Car())->getAllAsObjects();
-        }
-        elseif ($this->area === 'rental') {
-            $array = (new Rental())->getAllAsObjects();
-            // workaround, set Objects wird im Konstruktor von Rental nicht bedient ??
-            foreach ($array as $r){
-                $r->setObjects();
-            }
-        }
-
-        return $array;
+        return TableHelper::getAllObjectsByArea($this->area);
     }
 
 }
