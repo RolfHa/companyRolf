@@ -1,17 +1,11 @@
 <?php
 
-class showTableController implements IController
+class showTableController extends BaseController
 {
-    private string $area;
-    private string $view;
 
-    /**
-     * @param string $area
-     * @param string $view
-     */
     public function __construct(string $area)
     {
-        $this->area = $area;
+        parent::__construct($area);
         $this->view = 'table';
     }
 
@@ -29,17 +23,7 @@ class showTableController implements IController
             }
         }
         return  $array;
-
     }
 
-    public function getArea(): string
-    {
-        return $this->area;
-    }
-
-    public function getView(): string
-    {
-        return $this->view;
-    }
 
 }
