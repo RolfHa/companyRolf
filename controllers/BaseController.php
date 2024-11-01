@@ -1,6 +1,6 @@
 <?php
 
-abstract class BaseController implements IController
+abstract class BaseController
 {
     protected string $area;
     protected string $view;

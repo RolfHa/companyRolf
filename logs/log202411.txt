@@ -1,0 +1,7 @@
+2024-11-01 09:32:54 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 09:32:41 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 09:31:42 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 09:26:45 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 09:26:32 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 09:03:08 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 09:01:13 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
