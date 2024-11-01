@@ -12,14 +12,18 @@ class DeleteController extends BaseController
 
     public function invoke($getData, $postData): array
     {
-        if ($this->area === 'employee') {
-            (new Employee())->deleteObjectById($getData['id']);
-        } elseif ($this->area === 'car') {
-            (new Car())->deleteObjectById($getData['id']);
-        } elseif ($this->area === 'rental') {
-            (new Rental())->deleteObjectById($getData['id']);
-        }
+        try {
+            if ($this->area === 'employee') {
+                (new Employee())->deleteObjectById($getData['id']);
+            } elseif ($this->area === 'car') {
+                (new Car())->deleteObjectById($getData['id']);
+            } elseif ($this->area === 'rental') {
+                (new Rental())->deleteObjectById($getData['id']);
+            }
 
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
         return TableHelper::getAllObjectsByArea($this->area);
     }
 }

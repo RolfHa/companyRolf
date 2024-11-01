@@ -46,12 +46,16 @@ class Car implements IBasic
 
     public function getAllAsObjects(): array
     {
-        $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM car';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $cars = $stmt->fetchAll(PDO::FETCH_CLASS, 'Car');
-        return $cars;
+        try {
+            $pdo = Db::getConnection();
+            $sql = 'SELECT * FROM car';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $cars = $stmt->fetchAll(PDO::FETCH_CLASS, 'Car');
+            return $cars;
+        } catch (Exception $e) {
+            throw new Exception('Sorry, es ist ein Fehler aufgetreten, der Administrator ist informiert');
+        }
     }
 
     public function deleteObjectById(int $id): void
@@ -66,12 +70,19 @@ class Car implements IBasic
                            string $maker,
                            string $type): Car
     {
-        $pdo = Db::getConnection();
-        $sql = 'INSERT INTO car VALUES(NULL,?,?,?)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$numberPlate, $maker, $type]);
-        $id = $pdo->lastInsertId();
-        return new Car($id, $numberPlate, $maker, $type);
+        try {
+            $pdo = Db::getConnection();
+            $sql = 'INSERT INTO car VALUES(NULL,?,?,?)';
+            $stmt = $pdo->prepare($sql);
+            // Fehler provozieren
+            //$type = null;
+            $stmt->execute([$numberPlate, $maker, $type]);
+            $id = $pdo->lastInsertId();
+            return new Car($id, $numberPlate, $maker, $type);
+        } catch (Exception $e) {
+            throw new Exception($e);
+
+        }
     }
 
     public function getObjectById(int $id): Car
@@ -96,12 +107,12 @@ class Car implements IBasic
     {
         $cars = $this->getAllAsObjects();
         $html = '<select name="carId">';
-        foreach ($cars as $c){
+        foreach ($cars as $c) {
             $selected = '';
-            if (isset($rental)){
+            if (isset($rental)) {
                 $selected = ($c->getId() === $rental->getCarId()) ? ' selected' : '';
             }
-            $html .= '<option value="'. $c->getId() . '"' . $selected . '>' .  $c->getNumberPlate() . '</option>';
+            $html .= '<option value="' . $c->getId() . '"' . $selected . '>' . $c->getNumberPlate() . '</option>';
         }
         $html .= '</select>';
 

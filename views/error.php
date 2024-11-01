@@ -8,8 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-echo $e->getMessage();
-?>
+Sorry, es ist ein Fehler aufgetreten, der Administrator ist informiert.
 </body>
 </html>

@@ -120,12 +120,17 @@ class Employee implements IBasic
                            string $gender,
                            float  $salary): Employee
     {
-        $pdo = Db::getConnection();
-        $sql = 'INSERT INTO employee VALUES(NULL,?,?,?,?)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$firstName, $lastName, $gender, $salary]);
-        $id = $pdo->lastInsertId();
-        return new Employee($id, $firstName, $lastName, $gender, $salary);
+        try {
+            $pdo = Db::getConnection();
+            $sql = 'INSERT INTO employee VALUES(NULL,?,?,?,?)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$firstName, $lastName, $gender, $salary]);
+            $id = $pdo->lastInsertId();
+            return new Employee($id, $firstName, $lastName, $gender, $salary);
+        } catch (Exception $e) {
+            throw new Exception($e);
+
+        }
     }
 
     /**
@@ -162,12 +167,12 @@ class Employee implements IBasic
     {
         $employees = $this->getAllAsObjects();
         $html = '<select name="employeeId">';
-        foreach ($employees as $e){
+        foreach ($employees as $e) {
             $selected = '';
-            if (isset($rental)){
+            if (isset($rental)) {
                 $selected = ($e->getId() === $rental->getEmployeeId()) ? ' selected' : '';
             }
-            $html .= '<option value="'. $e->getId() . '"' . $selected . '>' .  $e->getName() . '</option>';
+            $html .= '<option value="' . $e->getId() . '"' . $selected . '>' . $e->getName() . '</option>';
         }
         $html .= '</select>';
 

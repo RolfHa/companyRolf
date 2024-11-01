@@ -15,17 +15,21 @@ class ShowEditController extends BaseController
 
     public function invoke($getData, $postData): array
     {
-        if (isset($getData['id'])) {
-            if ($this->area === 'employee') {
-                $array = (new Employee())->getObjectById($getData['id']);
-            } elseif ($this->area === 'car') {
-                $array = (new Car())->getObjectById($getData['id']);
-            } elseif ($this->area === 'rental') {
-                $array = (new Rental())->getObjectById($getData['id']);
+        try {
+            if (isset($getData['id'])) {
+                if ($this->area === 'employee') {
+                    $array = (new Employee())->getObjectById($getData['id']);
+                } elseif ($this->area === 'car') {
+                    $array = (new Car())->getObjectById($getData['id']);
+                } elseif ($this->area === 'rental') {
+                    $array = (new Rental())->getObjectById($getData['id']);
+                }
+                return ['action' => 'update', 'array' => $array];
             }
-            return ['action' => 'update', 'array' => $array];
+            return ['action' => 'insert', []];
+        } catch (Error $e) {
+            throw new Exception($e);
         }
-        return ['action' => 'insert',[] ];
     }
 
     public function getId(): int

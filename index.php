@@ -68,9 +68,14 @@ try {
             $$objectName = $array['array'];
         }
     }
+
     include 'views/' . $controller->getArea() . '/' . $controller->getView() . '.php';
 } catch (Exception $e) {
-    //echo $e->getMessage();
+    // Fehlermeldung in log-Datei schreiben
+    file_put_contents(LOG_PATH, (new DateTime())->format('Y-m-d H:i:s')
+        . ' ' . $e->getMessage() . "\n" . file_get_contents(LOG_PATH));
+
+    // user über AUftauchen eines Fehlers informieren
     include 'views/error.php';
 }
 

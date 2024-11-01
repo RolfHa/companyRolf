@@ -148,18 +148,24 @@ class Rental implements IBasic
             return (new Car())->getPulldownMenu();
         }
     }
+
     public function insert(string $employeeId,
                            string $carId,
                            string $startDate,
                            string $endDate): Rental
     {
-        $pdo = Db::getConnection();
-        $sql = 'INSERT INTO rental VALUES(NULL,?,?,?,?)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$employeeId, $carId, $startDate, $endDate]);
-        $id = $pdo->lastInsertId();
-        return new Rental($id, $employeeId, $carId, $startDate, $endDate);
+        try {
+            $pdo = Db::getConnection();
+            $sql = 'INSERT INTO rental VALUES(NULL,?,?,?,?)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$employeeId, $carId, $startDate, $endDate]);
+            $id = $pdo->lastInsertId();
+            return new Rental($id, $employeeId, $carId, $startDate, $endDate);
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
     }
+
     /**
      * @return void
      */

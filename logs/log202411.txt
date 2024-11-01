@@ -1,7 +1,10 @@
-2024-11-01 09:32:54 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-2024-11-01 09:32:41 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-2024-11-01 09:31:42 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-2024-11-01 09:26:45 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-2024-11-01 09:26:32 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-2024-11-01 09:03:08 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
-2024-11-01 09:01:13 SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-01 11:29:34 TypeError: Car::insert(): Argument #3 ($type) must be of type string, null given, called in C:\xampp\htdocs\company\controllers\InsertController.php on line 27 and defined in C:\xampp\htdocs\company\classes\Car.php:69
+Stack trace:
+#0 C:\xampp\htdocs\company\controllers\InsertController.php(27): Car->insert('kkk', 'hhh', NULL)
+#1 C:\xampp\htdocs\company\index.php(50): InsertController->invoke(Array, Array)
+#2 {main}
+2024-11-01 11:14:32 TypeError: Car::insert(): Argument #3 ($type) must be of type string, null given, called in C:\xampp\htdocs\company\controllers\InsertController.php on line 23 and defined in C:\xampp\htdocs\company\classes\Car.php:69
+Stack trace:
+#0 C:\xampp\htdocs\company\controllers\InsertController.php(23): Car->insert('kkk', 'hhh', NULL)
+#1 C:\xampp\htdocs\company\index.php(50): InsertController->invoke(Array, Array)
+#2 {main}
