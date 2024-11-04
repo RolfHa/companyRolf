@@ -1,3 +1,11 @@
+2024-11-04 12:48:38 PDOException: SQLSTATE[HY000] [2002] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte in C:\xampp\htdocs\company\classes\Db.php:17
+Stack trace:
+#0 C:\xampp\htdocs\company\classes\Db.php(17): PDO->__construct('mysql:dbname=fi...', 'root', Object(SensitiveParameterValue))
+#1 C:\xampp\htdocs\company\classes\Employee.php(91): Db::getConnection()
+#2 C:\xampp\htdocs\company\classes\TableHelper.php(13): Employee->getAllAsObjects()
+#3 C:\xampp\htdocs\company\controllers\ShowTableController.php(15): TableHelper::getAllObjectsByArea('employee')
+#4 C:\xampp\htdocs\company\index.php(50): showTableController->invoke(Array, Array)
+#5 {main}
 2024-11-01 11:29:34 TypeError: Car::insert(): Argument #3 ($type) must be of type string, null given, called in C:\xampp\htdocs\company\controllers\InsertController.php on line 27 and defined in C:\xampp\htdocs\company\classes\Car.php:69
 Stack trace:
 #0 C:\xampp\htdocs\company\controllers\InsertController.php(27): Car->insert('kkk', 'hhh', NULL)

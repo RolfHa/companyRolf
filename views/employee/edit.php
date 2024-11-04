@@ -22,6 +22,12 @@ if (isset($e)){
 <!doctype html>
 <html lang="en">
 <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/company.css" media="screen,projection"/>
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -47,9 +53,9 @@ if (isset($e)){
         <tr>
             <td><label>Geschlecht:</td>
             <td>
-                <input type="radio" name="gender" value="weiblich" <?php echo $genderW; ?>>weiblich
-                <input type="radio" name="gender" value="männlich" <?php echo $genderM; ?>>männlich
-                <input type="radio" name="gender" value="divers" <?php echo $genderD; ?>>divers
+                <label><input type="radio" name="gender" value="weiblich" <?php echo $genderW; ?>><span>weiblich</span></label>
+                <label><input type="radio" name="gender" value="männlich" <?php echo $genderM; ?>><span>männlich</span></label>
+                <label><input type="radio" name="gender" value="divers" <?php echo $genderD; ?>><span>divers</span></label>
                 </label></td>
         </tr>
         <tr>
