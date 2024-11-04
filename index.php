@@ -1,7 +1,6 @@
 <?php
 try {
 
-
     include 'config.php';
     spl_autoload_register(function ($className): void {
         if (substr($className, -10) === 'Controller') {
@@ -75,7 +74,7 @@ try {
     file_put_contents(LOG_PATH, (new DateTime())->format('Y-m-d H:i:s')
         . ' ' . $e->getMessage() . "\n" . file_get_contents(LOG_PATH));
 
-    // user über AUftauchen eines Fehlers informieren
+    // user über Auftauchen eines Fehlers informieren
     include 'views/error.php';
 }
 
