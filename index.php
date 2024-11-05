@@ -1,7 +1,6 @@
 <?php
 try {
 
-
     include 'config.php';
     spl_autoload_register(function ($className): void {
         if (substr($className, -10) === 'Controller') {
