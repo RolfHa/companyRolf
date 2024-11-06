@@ -14,7 +14,19 @@
         td, th{
             padding: 10px;
         }
+        .message {
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            border: 2px solid black;
+            padding: 5px;
+            width: 810px;
+
+        }
     </style>
 </head>
 <body>
 <?php include 'views/navigation.php'; ?>
+<!-- Nachricht an user, wenn er etwas nicht ausführen lassen kann z.B. Verstoß gegen FK- Constarint -->
+<div class="message"><?php echo $e->getMessage(); ?></div>

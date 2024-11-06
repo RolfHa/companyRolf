@@ -21,7 +21,14 @@ class DeleteController extends BaseController
                 (new Rental())->deleteObjectById($getData['id']);
             }
 
+        } catch(PDOException $e){
+            // bei Verstoß gegen FK-Constraint
+            if (substr($e->getMessage(),0,15) === 'SQLSTATE[23000]') {
+                //$message = 'FK-CONSTRAINT';
+            }
+
         } catch (Exception $e) {
+
             throw new Exception($e);
         }
         return TableHelper::getAllObjectsByArea($this->area);
