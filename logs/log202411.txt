@@ -1,10 +1,24 @@
-2024-11-01 11:29:34 TypeError: Car::insert(): Argument #3 ($type) must be of type string, null given, called in C:\xampp\htdocs\company\controllers\InsertController.php on line 27 and defined in C:\xampp\htdocs\company\classes\Car.php:69
+2024-11-06 08:46:45 PDOException: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`firmaneu`.`rental`, CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`)) in C:\xampp\htdocs\company\classes\Employee.php:108
 Stack trace:
-#0 C:\xampp\htdocs\company\controllers\InsertController.php(27): Car->insert('kkk', 'hhh', NULL)
-#1 C:\xampp\htdocs\company\index.php(50): InsertController->invoke(Array, Array)
-#2 {main}
-2024-11-01 11:14:32 TypeError: Car::insert(): Argument #3 ($type) must be of type string, null given, called in C:\xampp\htdocs\company\controllers\InsertController.php on line 23 and defined in C:\xampp\htdocs\company\classes\Car.php:69
+#0 C:\xampp\htdocs\company\classes\Employee.php(108): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\company\controllers\DeleteController.php(17): Employee->deleteObjectById(1)
+#2 C:\xampp\htdocs\company\index.php(49): DeleteController->invoke(Array, Array)
+#3 {main}
+2024-11-06 08:46:23 PDOException: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`firmaneu`.`rental`, CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`)) in C:\xampp\htdocs\company\classes\Employee.php:108
 Stack trace:
-#0 C:\xampp\htdocs\company\controllers\InsertController.php(23): Car->insert('kkk', 'hhh', NULL)
-#1 C:\xampp\htdocs\company\index.php(50): InsertController->invoke(Array, Array)
-#2 {main}
+#0 C:\xampp\htdocs\company\classes\Employee.php(108): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\company\controllers\DeleteController.php(17): Employee->deleteObjectById(1)
+#2 C:\xampp\htdocs\company\index.php(49): DeleteController->invoke(Array, Array)
+#3 {main}
+2024-11-06 08:44:27 PDOException: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`firmaneu`.`rental`, CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`)) in C:\xampp\htdocs\company\classes\Employee.php:108
+Stack trace:
+#0 C:\xampp\htdocs\company\classes\Employee.php(108): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\company\controllers\DeleteController.php(17): Employee->deleteObjectById(1)
+#2 C:\xampp\htdocs\company\index.php(49): DeleteController->invoke(Array, Array)
+#3 {main}
+2024-11-06 08:42:01 PDOException: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`firmaneu`.`rental`, CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`)) in C:\xampp\htdocs\company\classes\Employee.php:108
+Stack trace:
+#0 C:\xampp\htdocs\company\classes\Employee.php(108): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\company\controllers\DeleteController.php(17): Employee->deleteObjectById(1)
+#2 C:\xampp\htdocs\company\index.php(49): DeleteController->invoke(Array, Array)
+#3 {main}

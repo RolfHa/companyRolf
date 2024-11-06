@@ -9,7 +9,7 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<!--    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>-->
     <style>
         td, th{
             padding: 10px;
@@ -22,11 +22,11 @@
             border: 2px solid black;
             padding: 5px;
             width: 810px;
-
+            visibility: visible;
         }
     </style>
 </head>
 <body>
 <?php include 'views/navigation.php'; ?>
 <!-- Nachricht an user, wenn er etwas nicht ausführen lassen kann z.B. Verstoß gegen FK- Constarint -->
-<div class="message"><?php echo $e->getMessage(); ?></div>
+<div class="message"><?php echo $message; ?></div>

@@ -13,6 +13,7 @@ class DeleteController extends BaseController
     public function invoke($getData, $postData): array
     {
         try {
+            $message = ''; // Info an user
             if ($this->area === 'employee') {
                 (new Employee())->deleteObjectById($getData['id']);
             } elseif ($this->area === 'car') {
@@ -24,13 +25,13 @@ class DeleteController extends BaseController
         } catch(PDOException $e){
             // bei Verstoß gegen FK-Constraint
             if (substr($e->getMessage(),0,15) === 'SQLSTATE[23000]') {
-                //$message = 'FK-CONSTRAINT';
+                $message = 'Ich kann keinen ' . $this->area . ' löschen, der noch in der Tabelle Ausleihe steht.';
             }
 
         } catch (Exception $e) {
 
             throw new Exception($e);
         }
-        return TableHelper::getAllObjectsByArea($this->area);
+        return ['array' => TableHelper::getAllObjectsByArea($this->area), 'message' => $message];
     }
 }

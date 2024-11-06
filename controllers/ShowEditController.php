@@ -24,9 +24,9 @@ class ShowEditController extends BaseController
                 } elseif ($this->area === 'rental') {
                     $array = (new Rental())->getObjectById($getData['id']);
                 }
-                return ['action' => 'update', 'array' => $array];
+                return ['action' => 'update', 'array' => $array, 'message' => ''];
             }
-            return ['action' => 'insert', []];
+            return ['action' => 'insert', 'message' => ''];
         } catch (Error $e) {
             throw new Exception($e);
         }

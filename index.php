@@ -46,14 +46,18 @@ try {
         $controllerName = ucfirst($action) . 'Controller';
         $controller = new $controllerName($area);
 
-        $array = $controller->invoke($getData, $postData);
+        $response = $controller->invoke($getData, $postData);
+        $array = $response['array'] ?? ''; // Daten für views
+        $message = $response['message']; // Nachrichten für user
+        $newAction = $response['action'] ?? '';
+//        $array = $controller->invoke($getData, $postData);
 
-        if (isset($array['action']) && $array['action'] === 'insert') {
+        // Vorbereitung für Form-Variable name="action" value="???"
+        if ($newAction === 'insert') {
             $action = 'insert';
         } else {
             $action = 'update';
         }
-
     }
 
 // Variablennamen für table (z.B. $employees oder $cars) und Objekte (z.B. $e oder $c)
@@ -62,9 +66,9 @@ try {
         $arrayName = $area . 's';
         $$arrayName = $array;
     } elseif ($controller->getView() === 'edit') { //Variablennamen für Objekte in edit (z.B. $e oder $c)
-        if (isset($array['array'])) { // nur bei update Vorbelegung der input-Felder
+        if ($action === 'update') { // nur bei update Vorbelegung der input-Felder
             $objectName = substr($area, 0, 1);
-            $$objectName = $array['array'];
+            $$objectName = $array;
         }
     }
 

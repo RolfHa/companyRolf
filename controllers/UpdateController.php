@@ -27,7 +27,7 @@ class updateController extends BaseController
             throw new Exception($e);
 
         }
-        return TableHelper::getAllObjectsByArea($this->area);
+        return ['array' => TableHelper::getAllObjectsByArea($this->area), 'message' => ''];
     }
 
 }
