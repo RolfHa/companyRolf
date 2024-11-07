@@ -22,9 +22,9 @@ class DeleteController extends BaseController
                 (new Rental())->deleteObjectById($getData['id']);
             }
 
-        } catch(PDOException $e){
+        } catch (PDOException $e) {
             // bei Verstoß gegen FK-Constraint
-            if (substr($e->getMessage(),0,15) === 'SQLSTATE[23000]') {
+            if (substr($e->getMessage(), 0, 15) === 'SQLSTATE[23000]') {
                 $message = 'Ich kann keinen ' . $this->area . ' löschen, der noch in der Tabelle Ausleihe steht.';
             }
 
