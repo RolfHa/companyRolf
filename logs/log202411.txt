@@ -1,3 +1,22 @@
+2024-11-08 09:23:26 Error: Typed property Car::$numberPlate must not be accessed before initialization in C:\xampp\htdocs\company\classes\Car.php:103
+Stack trace:
+#0 C:\xampp\htdocs\company\controllers\UpdateController.php(21): Car->update()
+#1 C:\xampp\htdocs\company\index.php(51): updateController->invoke(Array, Array)
+#2 {main}
+2024-11-08 09:01:27 TypeError: Response::__construct(): Argument #1 ($array) must be of type array, Employee given, called in C:\xampp\htdocs\company\controllers\ShowEditController.php on line 27 and defined in C:\xampp\htdocs\company\classes\Response.php:24
+Stack trace:
+#0 C:\xampp\htdocs\company\controllers\ShowEditController.php(27): Response->__construct(Object(Employee))
+#1 C:\xampp\htdocs\company\index.php(51): ShowEditController->invoke(Array, Array)
+#2 {main}
+2024-11-08 09:00:31 TypeError: Response::__construct(): Argument #1 ($array) must be of type array, Employee given, called in C:\xampp\htdocs\company\controllers\ShowEditController.php on line 27 and defined in C:\xampp\htdocs\company\classes\Response.php:24
+Stack trace:
+#0 C:\xampp\htdocs\company\controllers\ShowEditController.php(27): Response->__construct(Object(Employee))
+#1 C:\xampp\htdocs\company\index.php(51): ShowEditController->invoke(Array, Array)
+#2 {main}
+2024-11-08 08:52:25 TypeError: ShowEditController::invoke(): Return value must be of type array, Response returned in C:\xampp\htdocs\company\controllers\ShowEditController.php:32
+Stack trace:
+#0 C:\xampp\htdocs\company\index.php(51): ShowEditController->invoke(Array, Array)
+#1 {main}
 2024-11-06 08:46:45 PDOException: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`firmaneu`.`rental`, CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`)) in C:\xampp\htdocs\company\classes\Employee.php:108
 Stack trace:
 #0 C:\xampp\htdocs\company\classes\Employee.php(108): PDOStatement->execute(Array)

@@ -10,21 +10,20 @@ class Response
      * @var string
      * für Info an user z.B. unrichtige Eingaben
      */
-    private string $message;
+    private string $message = '';
     /**
      * @var string
      * für form-tag eine hidden Übergabevariable, die angibt, was die nächste action ist: z.B. insert oder update
      */
-    private string $action;
+    private string $action = '';
 
     /**
      * @param array $array
      * @param string $message
      */
-    public function __construct(array $array, string $message)
+    public function __construct(array $array)
     {
         $this->array = $array;
-        $this->message = $message;
     }
 
     public function getArray(): array
@@ -45,6 +44,11 @@ class Response
     public function setAction(string $action): void
     {
         $this->action = $action;
+    }
+
+    public function setMessage(string $message): void
+    {
+        $this->message = $message;
     }
 
 

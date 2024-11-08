@@ -10,7 +10,7 @@ class DeleteController extends BaseController
 
     }
 
-    public function invoke($getData, $postData): array
+    public function invoke($getData, $postData): Response
     {
         try {
             $message = ''; // Info an user
@@ -32,6 +32,12 @@ class DeleteController extends BaseController
 
             throw new Exception($e);
         }
-        return ['array' => TableHelper::getAllObjectsByArea($this->area), 'message' => $message];
+
+        try {
+            $array = TableHelper::getAllObjectsByArea($this->area);
+        } catch (Error $e) {
+            throw new Exception($e);
+        }
+        return new Response($array);
     }
 }

@@ -21,8 +21,9 @@ try {
     $area = $_REQUEST['area'] ?? 'employee'; // Standardwert
 
 // verkürzt
-    $salary = filter_var($_POST['salary'], FILTER_VALIDATE_FLOAT);
+    //$salary = filter_var($_POST['salary'], FILTER_VALIDATE_FLOAT);
 
+    $postData = [];
     $postDataNames = ['firstName', 'lastName', 'gender', 'salary', 'maker', 'type', 'numberPlate',
         'area', 'id', 'action', 'employeeId', 'carId', 'startDate', 'endDate'];
     foreach ($postDataNames as $field) {
@@ -47,16 +48,15 @@ try {
         $controllerName = ucfirst($action) . 'Controller';
         $controller = new $controllerName($area);
 
-        $response = $controller->invoke($getData, $postData);
-        $array = $response['array'] ?? ''; // Daten für views
-        $message = $response['message']; // Nachrichten für user
-        $newAction = $response['action'] ?? ''; // neue Action als Angabe: insert oder update
-//        $array = $controller->invoke($getData, $postData);
+        $response = $controller->invoke($getData, $postData);print_r($response);
+        $array = $response->getArray();
+        $message = $response->getMessage() ?? ''; // Nachrichten für user
+        $newAction = $response->getAction() ?? ''; // neue Action als Angabe: insert oder update
 
         // Vorbereitung für Form-Variable name="action" value="???"
         if ($newAction === 'insert') {
             $action = 'insert';
-        } else {
+        } elseif ($newAction === 'update') {
             $action = 'update';
         }
     }

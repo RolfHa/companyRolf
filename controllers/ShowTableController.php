@@ -9,15 +9,14 @@ class showTableController extends BaseController
         $this->view = 'table';
     }
 
-    public function invoke(array $getData, array $postData): array
+    public function invoke(array $getData, array $postData): Response
     {
         try {
-            $message = '';
             $array = TableHelper::getAllObjectsByArea($this->area);
         } catch (Error $e) {
             throw new Exception($e);
         }
-        return ['array' => $array, 'message' => $message];
+        return new Response($array);
     }
 
 }

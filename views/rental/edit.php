@@ -1,4 +1,5 @@
 <?php
+$r = $r[0];
 $rentalDataExists = (isset($r) && $r->getId() !== null) ? true : false;
 $r = (!$rentalDataExists) ? new Rental() : $r;
 

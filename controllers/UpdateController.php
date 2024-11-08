@@ -9,7 +9,7 @@ class updateController extends BaseController
 
     }
 
-    public function invoke($getData, $postData): array
+    public function invoke($getData, $postData): Response
     {
         try {
             $this->view = 'table';
@@ -27,7 +27,13 @@ class updateController extends BaseController
             throw new Exception($e);
 
         }
-        return ['array' => TableHelper::getAllObjectsByArea($this->area), 'message' => ''];
+
+        try {
+            $array = TableHelper::getAllObjectsByArea($this->area);
+        } catch (Error $e) {
+            throw new Exception($e);
+        }
+        return new Response($array);
     }
 
 }

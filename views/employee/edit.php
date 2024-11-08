@@ -3,7 +3,7 @@
 $genderW = ' checked';
 $genderM = '';
 $genderD = '';
-
+$e = $e[0];
 if (isset($e)){
     if ($e->getGender() === 'weiblich') {
         $genderW = ' checked';

@@ -1,3 +1,4 @@
+<?php $c = $c[0]; ?>
 <?php include 'views/beginHtml.php'; ?>
 <form action="index.php" method="post">
     <input type="hidden" name="action" value="<?php echo $action; ?>">

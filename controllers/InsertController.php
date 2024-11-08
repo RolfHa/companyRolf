@@ -12,7 +12,7 @@ class InsertController extends BaseController
         $this->view = 'table';
     }
 
-    public function invoke($getData, $postData): array
+    public function invoke($getData, $postData): Response
     {
         try {
             if ($this->area === 'employee') {
@@ -29,8 +29,12 @@ class InsertController extends BaseController
         } catch (Error $e) {
             throw new Exception($e);
         }
-
-        return TableHelper::getAllObjectsByArea($this->area);
+        try {
+            $array = TableHelper::getAllObjectsByArea($this->area);
+        } catch (Error $e) {
+            throw new Exception($e);
+        }
+        return new Response($array);
     }
 
 }
