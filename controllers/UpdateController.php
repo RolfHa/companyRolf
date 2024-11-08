@@ -6,9 +6,14 @@ class updateController extends BaseController
     {
         parent::__construct($area);
         $view = 'table';
-
     }
 
+    /**
+     * @param $getData
+     * @param $postData
+     * @return Response
+     * @throws Exception
+     */
     public function invoke($getData, $postData): Response
     {
         try {

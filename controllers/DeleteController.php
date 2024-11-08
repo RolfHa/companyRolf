@@ -2,7 +2,9 @@
 
 class DeleteController extends BaseController
 {
-
+    /**
+     * @param string $area
+     */
     public function __construct(string $area)
     {
         parent::__construct($area);
@@ -10,6 +12,12 @@ class DeleteController extends BaseController
 
     }
 
+    /**
+     * @param $getData
+     * @param $postData
+     * @return Response
+     * @throws Exception
+     */
     public function invoke($getData, $postData): Response
     {
         try {

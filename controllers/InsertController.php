@@ -4,7 +4,6 @@ class InsertController extends BaseController
 {
     /**
      * @param string $area
-     * @param string $view
      */
     public function __construct(string $area)
     {
@@ -12,6 +11,12 @@ class InsertController extends BaseController
         $this->view = 'table';
     }
 
+    /**
+     * @param $getData
+     * @param $postData
+     * @return Response
+     * @throws Exception
+     */
     public function invoke($getData, $postData): Response
     {
         try {

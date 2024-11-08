@@ -8,6 +8,12 @@ class ShowEditController extends BaseController
         $this->view = 'edit';
     }
 
+    /**
+     * @param $getData
+     * @param $postData
+     * @return Response
+     * @throws Exception
+     */
     public function invoke($getData, $postData): Response
     {
         try {

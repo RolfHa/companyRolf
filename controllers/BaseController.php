@@ -6,7 +6,6 @@ abstract class BaseController
     protected string $view;
 
     /**
-     * @param string $area
      * @param string $view
      */
     public function __construct(string $area)

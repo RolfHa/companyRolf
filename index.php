@@ -20,9 +20,8 @@ try {
     $id = $_REQUEST['id'] ?? null;
     $area = $_REQUEST['area'] ?? 'employee'; // Standardwert
 
-// verkürzt
     //$salary = filter_var($_POST['salary'], FILTER_VALIDATE_FLOAT);
-
+    // verkürzt
     $postData = [];
     $postDataNames = ['firstName', 'lastName', 'gender', 'salary', 'maker', 'type', 'numberPlate',
         'area', 'id', 'action', 'employeeId', 'carId', 'startDate', 'endDate'];

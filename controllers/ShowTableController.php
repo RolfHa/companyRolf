@@ -9,6 +9,12 @@ class showTableController extends BaseController
         $this->view = 'table';
     }
 
+    /**
+     * @param array $getData
+     * @param array $postData
+     * @return Response
+     * @throws Exception
+     */
     public function invoke(array $getData, array $postData): Response
     {
         try {
