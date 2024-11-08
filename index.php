@@ -1,4 +1,10 @@
 <?php
+session_start();
+$_SESSION['userId'] = 2;
+// role = 'admin' darf alles, role = 'verleiher' darf nur in Ausleihe arbeiten: CRUD
+//$_SESSION['role'] = 'verleiher';
+$_SESSION['role'] = 'admin';
+$userRole = $_SESSION['role'];
 try {
 
     include 'config.php';
@@ -18,7 +24,10 @@ try {
 
     $action = $_REQUEST['action'] ?? 'showTable'; // Standardwert
     $id = $_REQUEST['id'] ?? null;
-    $area = $_REQUEST['area'] ?? 'employee'; // Standardwert
+    $area = $_REQUEST['area'] ?? 'rental'; // Standardwert
+
+    // nur admins dürfen direkt auf car und employee zugreifen
+    $area =  ($userRole !== 'admin')? 'rental' : $area;
 
     //$salary = filter_var($_POST['salary'], FILTER_VALIDATE_FLOAT);
     // verkürzt
