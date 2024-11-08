@@ -48,7 +48,7 @@ try {
         $controllerName = ucfirst($action) . 'Controller';
         $controller = new $controllerName($area);
 
-        $response = $controller->invoke($getData, $postData);print_r($response);
+        $response = $controller->invoke($getData, $postData);
         $array = $response->getArray();
         $message = $response->getMessage() ?? ''; // Nachrichten für user
         $newAction = $response->getAction() ?? ''; // neue Action als Angabe: insert oder update
@@ -68,7 +68,7 @@ try {
     } elseif ($controller->getView() === 'edit') { //Variablennamen für Objekte in edit (z.B. $e oder $c)
         if ($action === 'update') { // nur bei update Vorbelegung der input-Felder
             $objectName = substr($area, 0, 1);
-            $$objectName = $array;
+            $$objectName = $array[0];
         }
     }
 
