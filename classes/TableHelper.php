@@ -15,10 +15,6 @@ class TableHelper
             $array = (new Car())->getAllAsObjects();
         } elseif ($area === 'rental') {
             $array = (new Rental())->getAllAsObjects();
-            // workaround, set Objects wird im Konstruktor von Rental nicht bedient ??
-            foreach ($array as $r) {
-                $r->setObjects();
-            }
         }
         return $array;
     }

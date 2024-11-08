@@ -22,7 +22,7 @@ class ShowEditController extends BaseController
                 $r = new Response([$array]);
                 $r->setAction('update');
                 return $r;
-                //return ['action' => 'update', 'array' => $array, 'message' => ''];
+
             }
             $r = new Response([]);
             $r->setAction('insert');

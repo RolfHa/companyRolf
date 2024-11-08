@@ -41,8 +41,8 @@ class Rental implements IBasic
             // HTML datetime-local enthält ein 'T' als Trenner zwischen Tag und Uhrzeit
             $this->startDate = str_replace('T', ' ', $startDate);
             $this->endDate = str_replace('T', ' ', $endDate);
-            // $this->>employee = (new Employee())->$this->setObjects($employeeId) funktioniert hier nicht ??
-            // workaround im RentalController
+            $this->employee = (new Employee())->getObjectById($employeeId);
+            $this->car = (new Car())->getObjectById($carId);
         }
     }
 
@@ -106,8 +106,9 @@ class Rental implements IBasic
         $sql = 'SELECT * FROM rental WHERE id=?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        $r = $stmt->fetchObject('Rental');
-        return $r;
+        // FETCH_FUNC , damit der Konstruktor von Rental wirklich aufgerufen wird
+        $r = $stmt->fetchAll(PDO::FETCH_FUNC, function ($id, $employeeId, $carId, $startDate, $endDate){ return new Rental($id, $employeeId, $carId, $startDate, $endDate);});
+        return $r[0];
     }
 
     /**
@@ -119,8 +120,8 @@ class Rental implements IBasic
         $sql = 'SELECT * FROM rental';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        $rentals = $stmt->fetchAll(PDO::FETCH_CLASS, 'Rental');
-        return $rentals;
+        // FETCH_FUNC , damit der Konstruktor von Rental wirklich aufgerufen wird
+        return $stmt->fetchAll(PDO::FETCH_FUNC, function ($id, $employeeId, $carId, $startDate, $endDate){ return new Rental($id, $employeeId, $carId, $startDate, $endDate);});
     }
 
     public function deleteObjectById(int $id): void
