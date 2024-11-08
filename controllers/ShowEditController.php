@@ -2,18 +2,13 @@
 
 class ShowEditController extends BaseController
 {
-    /**
-     * @var ?int
-     */
-    private int $id;
-
     public function __construct(string $area)
     {
         parent::__construct($area);
         $this->view = 'edit';
     }
 
-    public function invoke($getData, $postData): array
+    public function invoke($getData, $postData): Response
     {
         try {
             if (isset($getData['id'])) {
@@ -24,17 +19,17 @@ class ShowEditController extends BaseController
                 } elseif ($this->area === 'rental') {
                     $array = (new Rental())->getObjectById($getData['id']);
                 }
-                return ['action' => 'update', 'array' => $array, 'message' => ''];
+                $r = new Response([$array]);
+                $r->setAction('update');
+                return $r;
+                //return ['action' => 'update', 'array' => $array, 'message' => ''];
             }
-            return ['action' => 'insert', 'message' => ''];
+            $r = new Response([]);
+            $r->setAction('insert');
+            return $r;
         } catch (Error $e) {
             throw new Exception($e);
         }
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
 }

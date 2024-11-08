@@ -10,7 +10,7 @@ class DeleteController extends BaseController
 
     }
 
-    public function invoke($getData, $postData): array
+    public function invoke($getData, $postData): Response
     {
         try {
             $message = ''; // Info an user
@@ -22,9 +22,9 @@ class DeleteController extends BaseController
                 (new Rental())->deleteObjectById($getData['id']);
             }
 
-        } catch(PDOException $e){
+        } catch (PDOException $e) {
             // bei Verstoß gegen FK-Constraint
-            if (substr($e->getMessage(),0,15) === 'SQLSTATE[23000]') {
+            if (substr($e->getMessage(), 0, 15) === 'SQLSTATE[23000]') {
                 $message = 'Ich kann keinen ' . $this->area . ' löschen, der noch in der Tabelle Ausleihe steht.';
             }
 
@@ -32,6 +32,12 @@ class DeleteController extends BaseController
 
             throw new Exception($e);
         }
-        return ['array' => TableHelper::getAllObjectsByArea($this->area), 'message' => $message];
+
+        try {
+            $array = TableHelper::getAllObjectsByArea($this->area);
+        } catch (Error $e) {
+            throw new Exception($e);
+        }
+        return new Response($array);
     }
 }

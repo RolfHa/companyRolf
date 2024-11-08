@@ -21,6 +21,8 @@ try {
     $area = $_REQUEST['area'] ?? 'employee'; // Standardwert
 
 // verkürzt
+    //$salary = filter_var($_POST['salary'], FILTER_VALIDATE_FLOAT);
+
     $postData = [];
     $postDataNames = ['firstName', 'lastName', 'gender', 'salary', 'maker', 'type', 'numberPlate',
         'area', 'id', 'action', 'employeeId', 'carId', 'startDate', 'endDate'];
@@ -47,28 +49,26 @@ try {
         $controller = new $controllerName($area);
 
         $response = $controller->invoke($getData, $postData);
-        $array = $response['array'] ?? ''; // Daten für views
-        $message = $response['message']; // Nachrichten für user
-        $newAction = $response['action'] ?? '';
-//        $array = $controller->invoke($getData, $postData);
+        $array = $response->getArray();
+        $message = $response->getMessage() ?? ''; // Nachrichten für user
+        $newAction = $response->getAction() ?? ''; // neue Action als Angabe: insert oder update
 
         // Vorbereitung für Form-Variable name="action" value="???"
         if ($newAction === 'insert') {
             $action = 'insert';
-        } else {
+        } elseif ($newAction === 'update') {
             $action = 'update';
         }
     }
 
 // Variablennamen für table (z.B. $employees oder $cars) und Objekte (z.B. $e oder $c)
-//echo $view;
     if ($controller->getView() === 'table') {
         $arrayName = $area . 's';
         $$arrayName = $array;
     } elseif ($controller->getView() === 'edit') { //Variablennamen für Objekte in edit (z.B. $e oder $c)
         if ($action === 'update') { // nur bei update Vorbelegung der input-Felder
             $objectName = substr($area, 0, 1);
-            $$objectName = $array;
+            $$objectName = $array[0];
         }
     }
 
@@ -78,7 +78,7 @@ try {
     file_put_contents(LOG_PATH, (new DateTime())->format('Y-m-d H:i:s')
         . ' ' . $e->getMessage() . "\n" . file_get_contents(LOG_PATH));
 
-    // user über AUftauchen eines Fehlers informieren
+    // user über Auftauchen eines Fehlers informieren
     include 'views/error.php';
 }
 
