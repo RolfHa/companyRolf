@@ -46,6 +46,8 @@ class DeleteController extends BaseController
         } catch (Error $e) {
             throw new Exception($e);
         }
-        return new Response($array);
+        $r = new Response($array);
+        $r->setMessage($message);
+        return $r;
     }
 }
