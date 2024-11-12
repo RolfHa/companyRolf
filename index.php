@@ -2,8 +2,8 @@
 session_start();
 $_SESSION['userId'] = 2;
 // role = 'admin' darf alles, role = 'verleiher' darf nur in Ausleihe arbeiten: CRUD
-//$_SESSION['role'] = 'verleiher';
-$_SESSION['role'] = 'admin';
+$_SESSION['role'] = 'verleiher';
+//$_SESSION['role'] = 'admin';
 $userRole = $_SESSION['role'];
 try {
 

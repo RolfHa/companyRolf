@@ -5,7 +5,13 @@ Strafmandaten der verursachende Fahrer zur Rechenschaft gezogen werden kann.
 Der Standarduser darf Ausleihen von Autos an Mitarbeiter eingeben sehen und Löschen und Ändern. Der Admin
 darf Autos und Mitarbeiter anlegen, ändern, löschen und auslesen. Mitarbeiter und Autos dürfen nicht gelöscht werden,
 solange sie in der Tabelle Ausleihe noch vorhanden sind. Das Projekt ist in 2 Wochen fertig zustellen.
+Für das Einloggen wird die vorgefundene App benutzt.
 
 Funktionale Anforderungen
-Alle Daten, Mitarbeiter, Autos, Ausleihe mit Start und enddatum  werden in einer SQL-Datenbank vorgehalten.
+Alle Daten, Mitarbeiter, Autos, Ausleihe mit Start- und Enddatum  werden in einer SQL-Datenbank vorgehalten.
 Der Standarduser sieht nur die Ausleihe, der Admin alle Daten, siehe Use-Case-Diagramm.
+Views: tabelle.php und edit.php für die 3 Basisklassen Car, Employee und Rental erstellen.
+Alle Objekte sollen eingebbar, auslesbar, editier- und löschbar sein. Der FK-Constraint muss beachtet werden.
+Die controller sollen die jeweiligen Methoden aufrufen. Bei user-Fehleingaben wird jeweils eine Nachricht ausgegeben.
+2 unterschiedliche user-Rollen werden implementiert: der Verleiher und der Administrator. Letzterer darf alle Events auslösen,
+der Verleiher trägt nur in die Ausleihtabelle ein.

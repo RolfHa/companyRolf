@@ -1,5 +1,5 @@
 funktionale Anforderungen
-event: load tabelle.php
+event für ausleihe, employee, car: load tabelle.php
 Struktur erstellen index.php mit tabelle.php als Startseite
 in index.php Einbinden vom view schreiben
 in tabelle.php Tabellenstruktur schreiben
