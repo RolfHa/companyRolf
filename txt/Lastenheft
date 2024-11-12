@@ -14,4 +14,5 @@ Views: tabelle.php und edit.php für die 3 Basisklassen Car, Employee und Rental
 Alle Objekte sollen eingebbar, auslesbar, editier- und löschbar sein. Der FK-Constraint muss beachtet werden.
 Die controller sollen die jeweiligen Methoden aufrufen. Bei user-Fehleingaben wird jeweils eine Nachricht ausgegeben.
 2 unterschiedliche user-Rollen werden implementiert: der Verleiher und der Administrator. Letzterer darf alle Events auslösen,
-der Verleiher trägt nur in die Ausleihtabelle ein.
+der Verleiher trägt nur in die Ausleihtabelle ein. Alle Eingabefelder sind Pflichtfelder, bis auf Ausleihende bei der Ausleihe.
+Navigationslinks sind zu erstellen.
